@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pushpendra Bairwa - Cloud Infrastructure &amp; DevOps Engineer | Hashnode</title>
+  <meta name="description" content="Building scalable cloud infrastructure | 2+ years of hands-on production experience in AWS, DevOps, and Server Administration">
+  <meta property="og:title" content="Pushpendra Bairwa - Cloud Infrastructure &amp; DevOps Engineer">
+  <meta property="og:description" content="Building scalable cloud infrastructure | 2+ years of hands-on production experience">
+  <meta property="og:image" content="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/fd13974f-6a3c-49f6-8dd5-c813a426a7ee.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pushpendra Bairwa - Cloud Infrastructure &amp; DevOps Engineer">
+  <meta name="twitter:description" content="Building scalable cloud infrastructure | 2+ years of hands-on production experience">
+  <meta name="twitter:image" content="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/fd13974f-6a3c-49f6-8dd5-c813a426a7ee.png">
+  <style>
+    :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom styles */
+.hero {
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 50%, #1e293b 100%);
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://user-gen-media-assets.s3.amazonaws.com/seedream_images/b9e66804-c33b-4985-9558-919a89f4a542.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  margin: 0 auto 20px;
+  border: 4px solid var(--color-white);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 12px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+}
+
+.hero h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: var(--color-teal-300);
+  font-weight: var(--font-weight-medium);
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 32px;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 32px;
+  border-radius: var(--radius-base);
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-white);
+  border: 2px solid var(--color-white);
+}
+
+.btn-secondary:hover {
+  background: var(--color-white);
+  color: var(--color-slate-900);
+  transform: translateY(-2px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-bottom: 48px;
+  color: var(--color-text);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: var(--color-surface);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.expertise-card {
+  background: var(--color-surface);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.expertise-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.expertise-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.expertise-card h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+
+.expertise-card ul {
+  list-style: none;
+}
+
+.expertise-card li {
+  padding: 8px 0;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.expertise-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.work-card {
+  background: var(--color-bg-1);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  margin-bottom: 40px;
+}
+
+.work-header {
+  margin-bottom: 24px;
+}
+
+.work-header h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.work-duration {
+  color: var(--color-text-secondary);
+  font-size: 16px;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.achievement-item {
+  padding: 16px;
+  background: var(--color-surface);
+  border-radius: var(--radius-base);
+  border-left: 4px solid var(--color-primary);
+  font-size: 15px;
+}
+
+.blog-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.category-tag {
+  background: var(--color-surface);
+  padding: 16px 20px;
+  border-radius: var(--radius-base);
+  text-align: center;
+  border: 1px solid var(--color-card-border);
+  transition: all var(--duration-normal) var(--ease-standard);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.category-tag:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.template-card {
+  background: var(--color-surface);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.template-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.template-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--color-text);
+}
+
+.template-card p {
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.cert-card {
+  background: var(--color-surface);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.cert-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.cert-badge {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.cert-name {
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.cert-status {
+  font-size: 13px;
+  color: var(--color-warning);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.connect-section {
+  background: var(--color-bg-2);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto 32px;
+}
+
+.contact-item {
+  padding: 20px;
+  background: var(--color-surface);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-card-border);
+}
+
+.contact-label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+}
+
+.contact-value {
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+.contact-value a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.contact-value a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.social-btn {
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-base);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.social-btn:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+footer {
+  background: var(--color-surface);
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-text {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  
+  .hero h2 {
+    font-size: 20px;
+  }
+  
+  .hero p {
+    font-size: 16px;
+  }
+  
+  .section-title {
+    font-size: 26px;
+  }
+  
+  .stats-grid,
+  .expertise-grid,
+  .templates-grid,
+  .certifications-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+  }
+  
+  .social-links {
+    flex-direction: column;
+  }
+}
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="profile-avatar">PB</div>
+      <h1>Pushpendra Bairwa</h1>
+      <h2>Cloud Infrastructure &amp; DevOps Engineer</h2>
+      <p>Building scalable cloud infrastructure | 2+ years of hands-on production experience</p>
+      <div class="cta-buttons">
+        <a href="https://hashnode.com/@pushpendra16" target="_blank" class="btn btn-primary">Read Blog</a>
+        <a href="#connect" class="btn btn-secondary">Connect with Me</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <h2 class="section-title">Key Achievements</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">☁️</div>
+        <div class="stat-value">100+</div>
+        <div class="stat-label">AWS Deployments</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🚀</div>
+        <div class="stat-value">50+</div>
+        <div class="stat-label">Zero-Downtime Migrations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚙️</div>
+        <div class="stat-value">99.9%</div>
+        <div class="stat-label">Uptime Maintained</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-value">40%</div>
+        <div class="stat-label">Efficiency Gain</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">Technical Expertise</h2>
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <div class="expertise-icon">☁️</div>
+        <h3>Cloud &amp; Infrastructure</h3>
+        <ul>
+          <li>AWS (EC2, S3, VPC, RDS, CloudFormation)</li>
+          <li>Multi-AZ deployments</li>
+          <li>IAM &amp; Security</li>
+          <li>Lambda &amp; Serverless</li>
+        </ul>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">🔧</div>
+        <h3>DevOps &amp; Automation</h3>
+        <ul>
+          <li>Docker &amp; Kubernetes</li>
+          <li>Terraform &amp; CloudFormation</li>
+          <li>Ansible &amp; n8n</li>
+          <li>CI/CD Pipelines</li>
+        </ul>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">🖥️</div>
+        <h3>Server Administration</h3>
+        <ul>
+          <li>Windows Server (AD, IIS, DNS)</li>
+          <li>Linux (Ubuntu, RHEL, CentOS)</li>
+          <li>Email Platforms (Office 365, Google Workspace)</li>
+          <li>Monitoring (Zabbix, CloudWatch)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">Recent Work</h2>
+    <div class="work-card">
+      <div class="work-header">
+        <h3>Server Administrator at Webspiders Interweb Pvt. Ltd.</h3>
+        <div class="work-duration">2023 - November 2025 | Jaipur, Rajasthan</div>
+      </div>
+      <div class="achievements-grid">
+        <div class="achievement-item">50+ email migrations (zero downtime)</div>
+        <div class="achievement-item">100+ AWS infrastructure deployments</div>
+        <div class="achievement-item">99.9% uptime across production</div>
+        <div class="achievement-item">40% efficiency improvement via automation</div>
+        <div class="achievement-item">95%+ SLA compliance maintained</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">Blog Topics I Cover</h2>
+    <div class="blog-categories">
+      <div class="category-tag">AWS &amp; Cloud Architecture</div>
+      <div class="category-tag">DevOps &amp; Automation</div>
+      <div class="category-tag">Server Administration</div>
+      <div class="category-tag">Kubernetes &amp; Docker</div>
+      <div class="category-tag">Email &amp; Communication</div>
+      <div class="category-tag">Security &amp; Compliance</div>
+      <div class="category-tag">Troubleshooting &amp; Case Studies</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">Featured Content Templates</h2>
+    <div class="templates-grid">
+      <div class="template-card">
+        <div class="template-icon">📋</div>
+        <h3>DevOps Playbook</h3>
+        <p>Step-by-step implementation guides with detailed walkthroughs</p>
+        <a href="https://hashnode.com/@pushpendra16" target="_blank" class="btn btn-primary">Learn More</a>
+      </div>
+      <div class="template-card">
+        <div class="template-icon">🚀</div>
+        <h3>Migration Runbook</h3>
+        <p>Zero-downtime migration procedures and runbooks</p>
+        <a href="https://hashnode.com/@pushpendra16" target="_blank" class="btn btn-primary">Learn More</a>
+      </div>
+      <div class="template-card">
+        <div class="template-icon">📚</div>
+        <h3>Technology Deep-Dive</h3>
+        <p>Comprehensive feature guides and architecture explanations</p>
+        <a href="https://hashnode.com/@pushpendra16" target="_blank" class="btn btn-primary">Learn More</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">Certifications</h2>
+    <div class="certifications-grid">
+      <div class="cert-card">
+        <div class="cert-badge">✅</div>
+        <div class="cert-name">AWS Certified Cloud Practitioner</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">✅</div>
+        <div class="cert-name">Google Workspace Administrator</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">✅</div>
+        <div class="cert-name">GitHub Foundations</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🔄</div>
+        <div class="cert-name">AWS Solutions Architect Associate</div>
+        <div class="cert-status">In Progress</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="connect" class="connect-section">
+    <div class="container">
+      <h2 class="section-title">Let's Connect!</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:push1697@gmail.com">push1697@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Jaipur, Rajasthan, India</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+91 8619274820</div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/pushpendra16" target="_blank" class="social-btn">LinkedIn</a>
+        <a href="https://github.com/push1697" target="_blank" class="social-btn">GitHub</a>
+        <a href="https://hashnode.com/@pushpendra16" target="_blank" class="social-btn">Hashnode Blog</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-text">&copy; 2025 Pushpendra Bairwa. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://hashnode.com/@pushpendra16" target="_blank">Blog</a>
+      <a href="https://linkedin.com/in/pushpendra16" target="_blank">LinkedIn</a>
+      <a href="https://github.com/push1697" target="_blank">GitHub</a>
+      <a href="mailto:push1697@gmail.com">Contact</a>
+    </div>
+  </footer>
+</body>
+</html>
