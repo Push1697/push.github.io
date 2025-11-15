@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Cloud,
   Server,
@@ -161,27 +162,28 @@ export default function Home() {
           <div className="absolute w-96 h-96 bg-purple-500/20 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse delay-1000"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center relative z-10">
-            <div className="mb-8 flex justify-center space-x-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="animate-fade-in text-center md:text-left">
+              <div className="mb-8 flex justify-center md:justify-start space-x-4">
               <Cloud className="w-12 h-12 text-cyan-400 animate-bounce" />
               <Server className="w-12 h-12 text-purple-400 animate-bounce delay-100" />
               <Code className="w-12 h-12 text-pink-400 animate-bounce delay-200" />
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Pushpendra Bairwa
-            </h1>
-            
-            <p className="text-2xl md:text-3xl mb-4 text-gray-300">
-              Server & Cloud Engineer
-            </p>
-            
-            <p className="text-lg md:text-xl mb-8 text-gray-400 max-w-2xl mx-auto">
-              AWS Certified | DevOps Enthusiast | Building Scalable Cloud Infrastructure
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Pushpendra Bairwa
+              </h1>
+              
+              <p className="text-2xl md:text-3xl mb-4 text-gray-300">
+                Server & Cloud Engineer
+              </p>
+              
+              <p className="text-lg md:text-xl mb-8 text-gray-400 max-w-2xl mx-auto md:mx-0">
+                AWS Certified | DevOps Enthusiast | Building Scalable Cloud Infrastructure
+              </p>
+              
+              <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-12">
               <a href="mailto:push1697@gmail.com" className="flex items-center space-x-2 bg-cyan-500/20 hover:bg-cyan-500/30 px-6 py-3 rounded-lg transition-all transform hover:scale-105">
                 <Mail className="w-5 h-5" />
                 <span>Email</span>
@@ -194,11 +196,28 @@ export default function Home() {
                 <Github className="w-5 h-5" />
                 <span>GitHub</span>
               </a>
+              </div>
+
+              <button onClick={() => scrollToSection('about')} className="animate-bounce">
+                <ChevronDown className="w-8 h-8 text-cyan-400" />
+              </button>
             </div>
 
-            <button onClick={() => scrollToSection('about')} className="animate-bounce">
-              <ChevronDown className="w-8 h-8 text-cyan-400" />
-            </button>
+            {/* Right: Profile image */}
+            <div className="flex justify-center md:justify-end">
+              <div className="relative w-56 h-56 md:w-80 md:h-80">
+                <div className="absolute -inset-6 md:-inset-8 rounded-full border-2 border-dashed border-cyan-400/40 animate-[spin_18s_linear_infinite]" />
+                <div className="absolute -inset-3 md:-inset-4 rounded-full border-2 border-purple-400/30" />
+                <Image
+                  src="/new_image.jpg"
+                  alt="Pushpendra Bairwa portrait"
+                  width={420}
+                  height={420}
+                  priority
+                  className="rounded-full object-cover w-full h-full border-4 border-slate-900 shadow-2xl relative z-10"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
