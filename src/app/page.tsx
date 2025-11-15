@@ -166,9 +166,9 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in text-center md:text-left">
               <div className="mb-8 flex justify-center md:justify-start space-x-4">
-              <Cloud className="w-12 h-12 text-cyan-400 animate-bounce" />
-              <Server className="w-12 h-12 text-purple-400 animate-bounce delay-100" />
-              <Code className="w-12 h-12 text-pink-400 animate-bounce delay-200" />
+              <Cloud className="w-12 h-12 text-cyan-400" />
+              <Server className="w-12 h-12 text-purple-400" />
+              <Code className="w-12 h-12 text-pink-400" />
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -198,7 +198,7 @@ export default function Home() {
               </a>
               </div>
 
-              <button onClick={() => scrollToSection('about')} className="animate-bounce">
+              <button onClick={() => scrollToSection('about')} className="hidden md:block animate-bounce mx-auto md:mx-0">
                 <ChevronDown className="w-8 h-8 text-cyan-400" />
               </button>
             </div>
