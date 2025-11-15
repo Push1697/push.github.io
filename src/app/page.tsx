@@ -111,8 +111,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <Terminal className="w-8 h-8 text-cyan-400" />
-              <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              <Terminal className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
+              <span className="text-base md:text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Pushpendra Bairwa
               </span>
             </div>
@@ -163,27 +163,27 @@ export default function Home() {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in text-center md:text-left">
-              <div className="mb-8 flex justify-center md:justify-start space-x-4">
-              <Cloud className="w-12 h-12 text-cyan-400" />
-              <Server className="w-12 h-12 text-purple-400" />
-              <Code className="w-12 h-12 text-pink-400" />
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="animate-fade-in text-center md:text-left mt-16 md:mt-0">
+              <div className="mb-6 md:mb-8 flex justify-center md:justify-start space-x-4">
+              <Cloud className="w-10 h-10 md:w-12 md:h-12 text-cyan-400 md:animate-bounce" />
+              <Server className="w-10 h-10 md:w-12 md:h-12 text-purple-400 md:animate-bounce md:delay-100" />
+              <Code className="w-10 h-10 md:w-12 md:h-12 text-pink-400 md:animate-bounce md:delay-200" />
               </div>
               
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Pushpendra Bairwa
               </h1>
               
-              <p className="text-2xl md:text-3xl mb-4 text-gray-300">
+              <p className="text-xl md:text-3xl mb-3 md:mb-4 text-gray-300">
                 Server & Cloud Engineer
               </p>
               
-              <p className="text-lg md:text-xl mb-8 text-gray-400 max-w-2xl mx-auto md:mx-0">
+              <p className="text-base md:text-xl mb-6 md:mb-8 text-gray-400 max-w-2xl mx-auto md:mx-0">
                 AWS Certified | DevOps Enthusiast | Building Scalable Cloud Infrastructure
               </p>
               
-              <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-12">
+              <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 mb-8 md:mb-12">
               <a href="mailto:push1697@gmail.com" className="flex items-center space-x-2 bg-cyan-500/20 hover:bg-cyan-500/30 px-6 py-3 rounded-lg transition-all transform hover:scale-105">
                 <Mail className="w-5 h-5" />
                 <span>Email</span>
