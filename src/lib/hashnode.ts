@@ -12,15 +12,16 @@ export interface BlogPost {
 }
 
 const HASHNODE_API = 'https://gql.hashnode.com/';
-const USERNAME = 'pushpendra16';
+const USERNAME = 'deepdev';
+const BLOG_HOST = 'blog.overflowbyte.cloud';
 
 export async function getBlogPosts(limit: number = 10): Promise<BlogPost[]> {
   const query = `
-    query GetUserPosts($username: String!, $page: Int!) {
-      user(username: $username) {
-        publication {
-          posts(page: $page) {
-            nodes {
+    query GetPublicationPosts($host: String!, $first: Int!) {
+      publication(host: $host) {
+        posts(first: $first) {
+          edges {
+            node {
               id
               title
               brief
@@ -49,12 +50,18 @@ export async function getBlogPosts(limit: number = 10): Promise<BlogPost[]> {
       },
       body: JSON.stringify({
         query,
-        variables: { username: USERNAME, page: 0 },
+        variables: { host: BLOG_HOST, first: limit },
       }),
     });
 
-    const { data } = await response.json();
-    const posts = data?.user?.publication?.posts?.nodes || [];
+    const result = await response.json();
+    
+    if (result.errors) {
+      console.error('GraphQL errors:', result.errors);
+      return [];
+    }
+
+    const posts = result.data?.publication?.posts?.edges?.map((edge: any) => edge.node) || [];
 
     return posts.map((post: any) => ({
       id: post.id,
@@ -75,26 +82,24 @@ export async function getBlogPosts(limit: number = 10): Promise<BlogPost[]> {
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   const query = `
-    query GetPost($username: String!, $slug: String!) {
-      user(username: $username) {
-        publication {
-          post(slug: $slug) {
-            id
-            title
-            brief
-            slug
-            content {
-              html
-            }
-            coverImage {
-              url
-            }
-            publishedAt
-            readTimeInMinutes
-            views
-            tags {
-              name
-            }
+    query GetPost($host: String!, $slug: String!) {
+      publication(host: $host) {
+        post(slug: $slug) {
+          id
+          title
+          brief
+          slug
+          content {
+            html
+          }
+          coverImage {
+            url
+          }
+          publishedAt
+          readTimeInMinutes
+          views
+          tags {
+            name
           }
         }
       }
@@ -109,12 +114,18 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       },
       body: JSON.stringify({
         query,
-        variables: { username: USERNAME, slug },
+        variables: { host: BLOG_HOST, slug },
       }),
     });
 
-    const { data } = await response.json();
-    const post = data?.user?.publication?.post;
+    const result = await response.json();
+    
+    if (result.errors) {
+      console.error('GraphQL errors:', result.errors);
+      return null;
+    }
+
+    const post = result.data?.publication?.post;
 
     if (!post) return null;
 
