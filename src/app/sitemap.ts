@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://push1697.github.io'
+  const baseUrl = 'https://pushpendra.overflowbyte.tech'
   
   return [
     {

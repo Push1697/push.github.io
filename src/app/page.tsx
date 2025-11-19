@@ -53,8 +53,8 @@ export default function Home() {
     "name": "Pushpendra",
     "jobTitle": "Server Administrator & Cloud Engineer",
     "description": "Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation",
-    "url": "https://push1697.github.io",
-    "image": "https://push1697.github.io/new_image.jpg",
+    "url": "https://pushpendra.overflowbyte.tech",
+    "image": "https://pushpendra.overflowbyte.tech/new_image.jpg",
     "email": "push1697@gmail.com",
     "address": {
       "@type": "PostalAddress",

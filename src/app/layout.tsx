@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     "Pushpendra",
     "Jaipur DevOps Engineer"
   ],
-  authors: [{ name: "Pushpendra", url: "https://push1697.github.io" }],
+  authors: [{ name: "Pushpendra", url: "https://pushpendra.overflowbyte.tech" }],
   creator: "Pushpendra",
   publisher: "Pushpendra",
   robots: {
@@ -66,13 +66,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://push1697.github.io',
+    url: 'https://pushpendra.overflowbyte.tech',
     siteName: 'Pushpendra - Server & Cloud Engineer Portfolio',
     title: 'Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional',
     description: 'Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation. AWS Certified professional with 2+ years of production experience.',
     images: [
       {
-        url: 'https://push1697.github.io/new_image.jpg',
+        url: 'https://pushpendra.overflowbyte.tech/new_image.jpg',
         width: 1200,
         height: 630,
         alt: 'Pushpendra - Server Administrator and Cloud Engineer',
@@ -83,13 +83,13 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional',
     description: 'Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation.',
-    images: ['https://push1697.github.io/new_image.jpg'],
+    images: ['https://pushpendra.overflowbyte.tech/new_image.jpg'],
   },
   verification: {
     google: 'your-google-verification-code', // Add your Google Search Console verification code
   },
   alternates: {
-    canonical: 'https://push1697.github.io',
+    canonical: 'https://pushpendra.overflowbyte.tech',
   },
 };
 
