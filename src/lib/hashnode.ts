@@ -68,8 +68,7 @@ export async function getBlogPosts(limit: number = 50): Promise<BlogPost[]> {
             after: afterCursor 
           },
         }),
-        // Add cache: 'no-store' to ensure fresh data
-        cache: 'no-store',
+        next: { revalidate: 3600 }, // Revalidate every hour
       });
 
       const result = await response.json();
@@ -146,6 +145,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         query,
         variables: { host: BLOG_HOST, slug },
       }),
+      next: { revalidate: 3600 }, // Revalidate every hour
     });
 
     const result = await response.json();
