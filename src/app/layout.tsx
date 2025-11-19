@@ -14,13 +14,82 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pushpendra - Server & Cloud Engineer | AWS Certified | DevOps",
-  description: "Server and Cloud Engineer with 2+ years of experience in AWS, Docker, Kubernetes, and infrastructure automation. AWS Certified Cloud Practitioner specializing in cloud migrations and DevOps.",
-  keywords: ["Pushpendra", "Cloud Engineer", "AWS", "DevOps", "Server Administration", "Docker", "Kubernetes", "Infrastructure"],
-  authors: [{ name: "Pushpendra" }],
+  title: "Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional | Kubernetes Expert",
+  description: "Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation. 2+ years managing production servers, cloud infrastructure, and enterprise migrations. AWS Certified professional offering server management, cloud administration, and infrastructure solutions.",
+  keywords: [
+    "Server Administrator",
+    "Server Management Professional",
+    "Cloud Administrator",
+    "DevOps Engineer",
+    "Kubernetes Professional",
+    "AWS Cloud Engineer",
+    "Linux Server Administrator",
+    "Windows Server Administrator",
+    "Cloud Infrastructure Engineer",
+    "DevOps Specialist",
+    "Docker Expert",
+    "Infrastructure Automation",
+    "Cloud Migration Specialist",
+    "Server Administration",
+    "Cloud Computing Professional",
+    "Kubernetes Administrator",
+    "AWS Solutions Architect",
+    "Office 365 Migration",
+    "Google Workspace Administrator",
+    "CI/CD Pipeline Engineer",
+    "Terraform",
+    "Infrastructure as Code",
+    "Server Management",
+    "Cloud DevOps",
+    "Production Server Management",
+    "Pushpendra",
+    "Jaipur DevOps Engineer"
+  ],
+  authors: [{ name: "Pushpendra", url: "https://push1697.github.io" }],
+  creator: "Pushpendra",
+  publisher: "Pushpendra",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://push1697.github.io',
+    siteName: 'Pushpendra - Server & Cloud Engineer Portfolio',
+    title: 'Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional',
+    description: 'Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation. AWS Certified professional with 2+ years of production experience.',
+    images: [
+      {
+        url: 'https://push1697.github.io/new_image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Pushpendra - Server Administrator and Cloud Engineer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional',
+    description: 'Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation.',
+    images: ['https://push1697.github.io/new_image.jpg'],
+  },
+  verification: {
+    google: 'your-google-verification-code', // Add your Google Search Console verification code
+  },
+  alternates: {
+    canonical: 'https://push1697.github.io',
   },
 };
 

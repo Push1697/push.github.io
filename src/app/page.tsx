@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Script from 'next/script';
 import {
   Cloud,
   Server,
@@ -43,6 +44,72 @@ export default function Home() {
       setActiveSection(id);
       setIsMenuOpen(false);
     }
+  };
+
+  // JSON-LD Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Pushpendra",
+    "jobTitle": "Server Administrator & Cloud Engineer",
+    "description": "Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation",
+    "url": "https://push1697.github.io",
+    "image": "https://push1697.github.io/new_image.jpg",
+    "email": "push1697@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Jaipur",
+      "addressRegion": "Rajasthan",
+      "addressCountry": "India"
+    },
+    "alumniOf": {
+      "@type": "Organization",
+      "name": "Education Institution"
+    },
+    "knowsAbout": [
+      "Server Administration",
+      "Cloud Computing",
+      "AWS",
+      "Kubernetes",
+      "Docker",
+      "DevOps",
+      "Linux Server Management",
+      "Windows Server Management",
+      "Cloud Infrastructure",
+      "Infrastructure Automation",
+      "CI/CD",
+      "Terraform",
+      "Office 365 Migration",
+      "Google Workspace",
+      "Server Management",
+      "Cloud Migration"
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "name": "AWS Certified Cloud Practitioner"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "name": "Google Workspace Administrator"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "name": "GitHub Foundations"
+      }
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Webspiders Interweb Pvt. Ltd."
+    },
+    "sameAs": [
+      "https://linkedin.com/in/pushpendra16",
+      "https://github.com/push1697",
+      "https://blog.overflowbyte.cloud"
+    ]
   };
 
   const experiences = [
@@ -113,6 +180,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+      {/* JSON-LD Structured Data for SEO */}
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
