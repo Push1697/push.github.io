@@ -3,14 +3,17 @@ import BlogCard from '@/components/BlogCard';
 import Link from 'next/link';
 import { BookOpen, ArrowLeft, Cloud, Server, Code } from 'lucide-react';
 
-export const revalidate = 3600;
+export const revalidate = 3600; // Revalidate every hour
 
 export default async function BlogPage() {
   let posts: BlogPost[] = [];
+  let error: string | null = null;
+  
   try {
-    posts = await getBlogPosts(20);
-  } catch (error) {
-    console.error('Failed to fetch blog posts:', error);
+    posts = await getBlogPosts(50); // Fetch up to 50 posts
+  } catch (err) {
+    console.error('Failed to fetch blog posts:', err);
+    error = 'Failed to load blog posts';
   }
 
   return (
@@ -49,6 +52,12 @@ export default async function BlogPage() {
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Insights on AWS, Kubernetes, Server Administration, and scalable infrastructure design
             </p>
+            
+            {posts.length > 0 && (
+              <p className="text-sm text-cyan-400 mt-4">
+                {posts.length} article{posts.length !== 1 ? 's' : ''} published
+              </p>
+            )}
           </div>
         </div>
       </div>

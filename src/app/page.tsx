@@ -102,7 +102,14 @@ export default function Home() {
     description: string;
     tags: string[];
     link?: string;
-  }> = [];
+  }> = [
+    {
+      title: "n8n Production Deployment with Docker",
+      description: "Comprehensive guide to deploying n8n workflow automation platform in production using Docker, including SSL setup, reverse proxy configuration, and security best practices.",
+      tags: ["Docker", "n8n", "Automation", "DevOps", "Production"],
+      link: "https://blog.overflowbyte.cloud/the-comprehensive-guide-to-deploying-n8n-in-production-a-docker-deployment-journey"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
@@ -113,7 +120,7 @@ export default function Home() {
             <div className="flex items-center space-x-2">
               <Terminal className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
               <span className="text-base md:text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Pushpendra Bairwa
+                Pushpendra
               </span>
             </div>
 
@@ -172,7 +179,7 @@ export default function Home() {
               </div>
               
               <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Pushpendra Bairwa
+                Pushpendra
               </h1>
               
               <p className="text-xl md:text-3xl mb-3 md:mb-4 text-gray-300">
@@ -210,7 +217,7 @@ export default function Home() {
                 <div className="absolute -inset-3 md:-inset-4 rounded-full border-2 border-purple-400/30" />
                 <Image
                   src="/new_image.jpg"
-                  alt="Pushpendra Bairwa portrait"
+                  alt="Pushpendra portrait"
                   width={420}
                   height={420}
                   priority

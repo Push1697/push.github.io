@@ -280,7 +280,7 @@ export default function Home() {
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-          <span className="text-xl font-bold text-blue-600">Pushpendra Bairwa</span>
+          <span className="text-xl font-bold text-blue-600">Pushpendra</span>
           <Link
             href="/blog"
             className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"

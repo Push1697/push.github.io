@@ -84,7 +84,7 @@ export default function Portfolio() {
             <div className="flex items-center space-x-2">
               <Terminal className="w-8 h-8 text-cyan-400" />
               <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Pushpendra Bairwa
+                Pushpendra
               </span>
             </div>
 
@@ -142,7 +142,7 @@ export default function Portfolio() {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Pushpendra Bairwa
+              Pushpendra
             </h1>
             
             <p className="text-2xl md:text-3xl mb-4 text-gray-300">
@@ -336,7 +336,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="py-8 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-          <p>© 2025 Pushpendra Bairwa. Built with React & Tailwind CSS</p>
+          <p>© 2025 Pushpendra. Built with React & Tailwind CSS</p>
           <p className="mt-2 text-sm">Jaipur, Rajasthan, India</p>
         </div>
       </footer>
