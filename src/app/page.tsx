@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Script from 'next/script';
 import {
   Cloud,
   Server,
@@ -43,6 +44,72 @@ export default function Home() {
       setActiveSection(id);
       setIsMenuOpen(false);
     }
+  };
+
+  // JSON-LD Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Pushpendra",
+    "jobTitle": "Server Administrator & Cloud Engineer",
+    "description": "Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation",
+    "url": "https://pushpendra.overflowbyte.tech",
+    "image": "https://pushpendra.overflowbyte.tech/new_image.jpg",
+    "email": "push1697@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Jaipur",
+      "addressRegion": "Rajasthan",
+      "addressCountry": "India"
+    },
+    "alumniOf": {
+      "@type": "Organization",
+      "name": "Education Institution"
+    },
+    "knowsAbout": [
+      "Server Administration",
+      "Cloud Computing",
+      "AWS",
+      "Kubernetes",
+      "Docker",
+      "DevOps",
+      "Linux Server Management",
+      "Windows Server Management",
+      "Cloud Infrastructure",
+      "Infrastructure Automation",
+      "CI/CD",
+      "Terraform",
+      "Office 365 Migration",
+      "Google Workspace",
+      "Server Management",
+      "Cloud Migration"
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "name": "AWS Certified Cloud Practitioner"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "name": "Google Workspace Administrator"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "certification",
+        "name": "GitHub Foundations"
+      }
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Webspiders Interweb Pvt. Ltd."
+    },
+    "sameAs": [
+      "https://linkedin.com/in/pushpendra16",
+      "https://github.com/push1697",
+      "https://blog.overflowbyte.cloud"
+    ]
   };
 
   const experiences = [
@@ -102,10 +169,24 @@ export default function Home() {
     description: string;
     tags: string[];
     link?: string;
-  }> = [];
+  }> = [
+    {
+      title: "n8n Production Deployment with Docker",
+      description: "Comprehensive guide to deploying n8n workflow automation platform in production using Docker, including SSL setup, reverse proxy configuration, and security best practices.",
+      tags: ["Docker", "n8n", "Automation", "DevOps", "Production"],
+      link: "https://blog.overflowbyte.cloud/the-comprehensive-guide-to-deploying-n8n-in-production-a-docker-deployment-journey"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+      {/* JSON-LD Structured Data for SEO */}
+      <Script
+        id="structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,7 +194,7 @@ export default function Home() {
             <div className="flex items-center space-x-2">
               <Terminal className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
               <span className="text-base md:text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Pushpendra Bairwa
+                Pushpendra
               </span>
             </div>
 
@@ -172,7 +253,7 @@ export default function Home() {
               </div>
               
               <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Pushpendra Bairwa
+                Pushpendra
               </h1>
               
               <p className="text-xl md:text-3xl mb-3 md:mb-4 text-gray-300">
@@ -210,7 +291,7 @@ export default function Home() {
                 <div className="absolute -inset-3 md:-inset-4 rounded-full border-2 border-purple-400/30" />
                 <Image
                   src="/new_image.jpg"
-                  alt="Pushpendra Bairwa portrait"
+                  alt="Pushpendra portrait"
                   width={420}
                   height={420}
                   priority

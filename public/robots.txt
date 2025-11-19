@@ -1,0 +1,9 @@
+# Allow all search engines to index the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://pushpendra.overflowbyte.tech/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1

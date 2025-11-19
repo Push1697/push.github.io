@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&duration=2800&pause=2000&color=00C7FF&center=true&vCenter=true&width=600&lines=Hi+%F0%9F%91%8B+I'm+Pushpendra+Bairwa;Server+%26+Cloud+Engineer;AWS+Certified+%7C+DevOps+Enthusiast;Building+Scalable+Infrastructure" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&duration=2800&pause=2000&color=00C7FF&center=true&vCenter=true&width=600&lines=Hi+%F0%9F%91%8B+I'm+Pushpendra;Server+%26+Cloud+Engineer;AWS+Certified+%7C+DevOps+Enthusiast;Building+Scalable+Infrastructure" alt="Typing SVG" />
 </div>
 
 <h3 align="center">🚀 Passionate about Cloud, Automation & Infrastructure 🚀</h3>
@@ -20,7 +20,7 @@
 ## 👨‍💻 About Me
 
 ```yaml
-name: Pushpendra Bairwa
+name: Pushpendra
 role: Server & Cloud Engineer
 location: Jaipur, Rajasthan, India
 experience: 2+ years
