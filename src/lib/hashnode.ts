@@ -55,7 +55,7 @@ export async function getBlogPosts(limit: number = 50): Promise<BlogPost[]> {
 
     // Fetch all pages up to the limit
     while (hasNextPage && fetchCount < maxFetches && allPosts.length < limit) {
-      const response = await fetch(HASHNODE_API, {
+      const response: Response = await fetch(HASHNODE_API, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
