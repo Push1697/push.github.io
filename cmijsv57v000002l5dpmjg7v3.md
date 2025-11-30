@@ -5,6 +5,7 @@ seoDescription: "Learn how to resolve IP conflicts in Talos Kubernetes labs with
 datePublished: Thu Nov 27 2025 18:30:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmijsv57v000002l5dpmjg7v3
 slug: resolving-ip-conflicts-in-talos-kubernetes-a-step-by-step-guide
+cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1764489249066/a3e0a0e6-ea4e-4f42-a6ec-98886c0a9bfa.png
 ogImage: https://cdn.hashnode.com/res/hashnode/image/upload/v1764391002492/b4b07f90-df0d-48a4-958c-d909af465841.png
 tags: virtual-machine, docker, kubernetes, containers, containerization, linux-for-beginners, talos-linux, core-dns-in-kubernetes
 
