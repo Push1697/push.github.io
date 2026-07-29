@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional | Kubernetes Expert",
-  description: "Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation. 2+ years managing production servers, cloud infrastructure, and enterprise migrations. AWS Certified professional offering server management, cloud administration, and infrastructure solutions.",
+  title: "Pushpendra Dev | Infrastructure System Engineer",
+  description: "Infrastructure System Engineer with 3 years of experience in enterprise infrastructure, FortiGate SD-WAN, networking, AWS cloud operations, Windows and Linux systems, DevOps, and automation.",
   keywords: [
     "Server Administrator",
     "Server Management Professional",
@@ -38,6 +38,11 @@ export const metadata: Metadata = {
     "Google Workspace Administrator",
     "CI/CD Pipeline Engineer",
     "Terraform",
+    "FortiGate Firewall",
+    "FortiGate SD-WAN",
+    "Enterprise Infrastructure",
+    "Network Engineer",
+    "Implementation Engineer",
     "Infrastructure as Code",
     "Server Management",
     "Cloud DevOps",
@@ -45,9 +50,9 @@ export const metadata: Metadata = {
     "Pushpendra",
     "Jaipur DevOps Engineer"
   ],
-  authors: [{ name: "Pushpendra", url: "https://pushpendra.overflowbyte.cloud" }],
-  creator: "Pushpendra",
-  publisher: "Pushpendra",
+  authors: [{ name: "Pushpendra Dev", url: "https://pushpendra.overflowbyte.cloud" }],
+  creator: "Pushpendra Dev",
+  publisher: "Pushpendra Dev",
   robots: {
     index: true,
     follow: true,
@@ -67,9 +72,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://pushpendra.overflowbyte.cloud',
-    siteName: 'Pushpendra - Server & Cloud Engineer Portfolio',
-    title: 'Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional',
-    description: 'Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation. AWS Certified professional with 2+ years of production experience.',
+    siteName: 'Pushpendra Dev - Infrastructure Engineer Portfolio',
+    title: 'Pushpendra Dev | Infrastructure System Engineer',
+    description: 'Enterprise infrastructure, FortiGate networking, AWS cloud operations, Windows and Linux systems, DevOps, and automation.',
     images: [
       {
         url: 'https://pushpendra.overflowbyte.cloud/new_image.jpg',
@@ -81,8 +86,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pushpendra - Server Administrator | Cloud Engineer | DevOps Professional',
-    description: 'Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation.',
+    title: 'Pushpendra Dev | Infrastructure System Engineer',
+    description: 'Enterprise infrastructure, FortiGate networking, AWS cloud operations, Windows and Linux systems, DevOps, and automation.',
     images: ['https://pushpendra.overflowbyte.cloud/new_image.jpg'],
   },
   verification: {

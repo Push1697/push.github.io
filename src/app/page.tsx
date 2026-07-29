@@ -1,548 +1,193 @@
-// Mark this file as a client component so hooks like useEffect work
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import Script from 'next/script';
+import { useEffect, useMemo, useState } from 'react';
 import {
-  Cloud,
-  Server,
-  Code,
-  Mail,
-  Linkedin,
-  Github,
-  Award,
-  Briefcase,
-  GraduationCap,
-  Terminal,
-  Database,
-  Shield,
-  ChevronDown,
-  Menu,
-  X,
-  ExternalLink,
+  Activity, ArrowRight, Award, BriefcaseBusiness, Check, ChevronDown,
+  Cloud, Code2, Copy, Database, Download, ExternalLink, Github, GraduationCap,
+  Headphones, Linkedin, Mail, MapPin, Menu, Monitor, Network, Radio, Server,
+  Shield, Sparkles, Terminal, Users, Wifi, X, Zap,
 } from 'lucide-react';
 
+const nav = ['home', 'about', 'experience', 'capabilities', 'projects', 'learning', 'certifications', 'contact'];
+
+const experiences = [
+  {
+    role: 'Infrastructure System Engineer', company: 'The House of Shubhashish',
+    period: 'Apr 2026 — Present', location: 'Jaipur, Rajasthan',
+    points: ['Contributed to end-to-end infrastructure implementation for a new 400+ seat office', 'Deploy and troubleshoot network racks, switches, access points, leased lines, endpoints, and link failover', 'Configure FortiGate SD-WAN policy routing for path-specific traffic control', 'Implemented Zoho Desk L1/L2/L3 SLA workflows, Poly Studio, HDMI-over-CAT6, and Zoom Rooms'],
+  },
+  {
+    role: 'IT Support Engineer', company: 'Bill Gosling Outsourcing India',
+    period: 'Feb 2026 — Mar 2026', location: 'Jaipur, Rajasthan',
+    points: ['Supported workstation operations in a high-volume contact-center environment', 'Resolved Windows, application, hardware, network, and VPN issues', 'Supported onboarding, seat moves, device replacement, and infrastructure escalations'],
+  },
+  {
+    role: 'Server Administrator / Cloud Operations Engineer', company: 'Webspiders Interweb Pvt. Ltd.',
+    period: 'Sep 2023 — Nov 2025', location: 'Jaipur, Rajasthan',
+    points: ['Led L1 support and escalated L2 incident handling with 95%+ SLA compliance', 'Completed 100+ Microsoft 365 and Google Workspace migrations', 'Administered AWS, Zabbix, Windows/Linux, IIS, Plesk, DNS, SSL, firewalls, and VPN', 'Automated repetitive operations with n8n and Bash; created SOPs and knowledge-base articles'],
+  },
+  {
+    role: 'AWS & System Administration Intern', company: 'LinuxWorld Informatics Pvt. Ltd.',
+    period: 'Jul 2023 — Sep 2023', location: 'Remote',
+    points: ['Practiced AWS EC2, S3, VPC, IAM, and CloudWatch', 'Worked with Linux administration, shell commands, logs, and network troubleshooting', 'Learned Terraform, Ansible, Docker, Git, and foundational CI/CD workflows'],
+  },
+];
+
+const capabilities = [
+  { title: 'Enterprise Infrastructure', icon: Server, items: ['400+ seat rollout', 'Structured cabling', 'Network racks', 'Leased lines', 'Link failover', 'Endpoints', 'Asset lifecycle', 'Vendor coordination'] },
+  { title: 'Networking & Security', icon: Shield, items: ['LAN / WAN', 'TCP/IP', 'FortiGate', 'SD-WAN', 'VPN', 'DNS', 'DHCP', 'Wireless APs'] },
+  { title: 'Cloud & DevOps', icon: Cloud, items: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'Ansible', 'CI/CD', 'GitHub Actions', 'GitOps'] },
+  { title: 'Systems & Operations', icon: Terminal, items: ['Windows Server', 'Linux', 'IIS', 'Plesk', 'Nginx', 'SSL', 'MySQL', 'MSSQL'] },
+  { title: 'Monitoring & Automation', icon: Activity, items: ['Zabbix', 'Prometheus', 'CloudWatch', 'n8n', 'Bash', 'PowerShell', 'Alerts', 'RCA'] },
+  { title: 'Workplace Technology', icon: Monitor, items: ['Microsoft 365', 'Google Workspace', 'Poly Studio', 'Zoom Rooms', 'HDMI over CAT6', 'Onboarding', 'Policies', 'Zoho Desk'] },
+];
+
+const projects = [
+  { n: '01', title: 'Secure AWS Infrastructure', description: 'Terraform-built VPC with private application subnets, ALB, Auto Scaling, automated provisioning, and GitHub Actions deployment through OIDC.', tags: ['AWS', 'Terraform', 'OIDC', 'ALB', 'ASG'], icon: Cloud },
+  { n: '02', title: 'Production n8n Deployment', description: 'Docker Compose, reverse proxy, SSL, persistent data, security hardening, troubleshooting, and operational documentation.', tags: ['Docker', 'n8n', 'Nginx', 'SSL'], icon: Zap, link: 'https://blog.overflowbyte.cloud/the-comprehensive-guide-to-deploying-n8n-in-production-a-docker-deployment-journey' },
+  { n: '03', title: 'Nextcloud on AWS', description: 'Reproducible Nextcloud, PostgreSQL, and document-server infrastructure with AMI recovery and cost-aware lifecycle operations.', tags: ['AWS', 'Nextcloud', 'PostgreSQL', 'Nginx'], icon: Database },
+  { n: '04', title: 'Kubernetes GitOps Pipeline', description: 'Self-managed Kubernetes on AWS with Jenkins CI, SonarQube and Trivy scanning, and declarative delivery through Argo CD.', tags: ['Kubernetes', 'Jenkins', 'Argo CD', 'Trivy'], icon: Code2 },
+  { n: '05', title: 'Preventive Monitoring', description: 'Zabbix and Prometheus infrastructure monitoring with service-health automation and Slack/email alert workflows.', tags: ['Zabbix', 'Prometheus', 'Linux', 'Automation'], icon: Activity },
+  { n: '06', title: 'Talos Linux Cluster Lab', description: 'Isolated Talos cluster using a dual-homed jump host, SSH tunnelling, and documented Flannel and CoreDNS troubleshooting.', tags: ['Talos', 'Kubernetes', 'Networking', 'Bastion'], icon: Network },
+];
+
+const learning = [
+  { title: 'Cloud-native infrastructure', status: 'Lab practice', icon: Network, items: ['Advanced Kubernetes', 'Talos Linux', 'Helm', 'GitOps', 'Cluster networking', 'Production troubleshooting'] },
+  { title: 'Contact-center technology', status: 'Actively learning', icon: Headphones, items: ['SIP', 'VoIP', 'PRI', 'IVR', 'ACD', 'CTI'] },
+  { title: 'AWS architecture', status: 'Actively learning', icon: Cloud, items: ['Solutions Architect Associate', 'Resilient architecture', 'Secure IaC', 'Auto scaling', 'Monitoring', 'Cost optimization'] },
+];
+
+function SectionTitle({ number, label, children }: { number: string; label: string; children: React.ReactNode }) {
+  return <div className="section-title reveal-on-scroll"><div className="eyebrow"><i />{number} · {label}</div><h2>{children}</h2></div>;
+}
+
+function CapabilityCard({ group, index }: { group: typeof capabilities[number]; index: number }) {
+  const [burst, setBurst] = useState(0);
+  const Icon = group.icon;
+  return (
+    <button className="capability-card glass reveal-on-scroll" style={{ '--delay': `${index * 65}ms` } as React.CSSProperties}
+      onClick={() => setBurst((v) => v + 1)} aria-label={`Show ${group.title} skill icons`}>
+      <div className="cap-head"><span className="icon-box"><Icon /></span><span className="cap-index">0{index + 1}</span></div>
+      <h3>{group.title}</h3>
+      <div className="skill-grid">{group.items.map((item) => <span key={item}>{item}</span>)}</div>
+      <div className="cap-hint"><Sparkles /> Click to deploy skill stack</div>
+      {burst > 0 && <div key={burst} className="skill-burst" aria-hidden="true">
+        {group.items.slice(0, 7).map((item, i) => <span key={item} style={{ '--i': i } as React.CSSProperties}><Icon />{item}</span>)}
+      </div>}
+    </button>
+  );
+}
+
+function Topology() {
+  const nodes = [
+    ['Internet', 50, 8, Radio], ['FortiGate', 82, 27, Shield], ['AWS Cloud', 91, 58, Cloud],
+    ['Monitoring', 75, 83, Activity], ['Endpoints', 40, 90, Monitor], ['Servers', 15, 76, Server],
+    ['Wireless AP', 8, 44, Wifi], ['Core Switch', 22, 20, Network],
+  ] as const;
+  return <div className="topology reveal-on-scroll">
+    <div className="topology-glow" />
+    <svg viewBox="0 0 500 500" aria-hidden="true">
+      <circle cx="250" cy="250" r="182" className="orbit dash" />
+      <circle cx="250" cy="250" r="116" className="orbit" />
+      {nodes.map(([, x, y], i) => <line key={i} x1="250" y1="250" x2={x * 5} y2={y * 5} className="data-line" style={{ animationDuration: `${3 + (i % 4)}s` }} />)}
+    </svg>
+    <div className="topology-avatar"><Image src="/new_image.jpg" alt="Pushpendra Dev" fill sizes="130px" priority /></div>
+    {nodes.map(([name, x, y, Icon]) => <div className="topology-node" key={name} style={{ left: `${x}%`, top: `${y}%` }}><span><Icon /><b /></span><small>{name}</small></div>)}
+    <div className="telemetry glass"><i className="status-dot" /> uptime <strong>99.98%</strong><em>•</em> latency <strong>18ms</strong></div>
+  </div>;
+}
+
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('home');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [active, setActive] = useState('home');
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const reveal = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible')), { threshold: .12 });
+    document.querySelectorAll('.reveal-on-scroll').forEach((el) => reveal.observe(el));
+    const sections = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)), { rootMargin: '-35% 0px -55%' });
+    nav.forEach((id) => { const el = document.getElementById(id); if (el) sections.observe(el); });
+    return () => { reveal.disconnect(); sections.disconnect(); };
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
-      setIsMenuOpen(false);
-    }
-  };
+  const year = useMemo(() => new Date().getFullYear(), []);
+  const copyEmail = async () => { await navigator.clipboard.writeText('push1697@gmail.com'); setCopied(true); setTimeout(() => setCopied(false), 1800); };
 
-  // JSON-LD Structured Data for SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Pushpendra",
-    "jobTitle": "Server Administrator & Cloud Engineer",
-    "description": "Expert Server Administrator and Cloud Engineer specializing in AWS, Kubernetes, Docker, and DevOps automation",
-    "url": "https://pushpendra.overflowbyte.cloud",
-    "image": "https://pushpendra.overflowbyte.cloud/new_image.jpg",
-    "email": "push1697@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Jaipur",
-      "addressRegion": "Rajasthan",
-      "addressCountry": "India"
-    },
-    "alumniOf": {
-      "@type": "Organization",
-      "name": "Education Institution"
-    },
-    "knowsAbout": [
-      "Server Administration",
-      "Cloud Computing",
-      "AWS",
-      "Kubernetes",
-      "Docker",
-      "DevOps",
-      "Linux Server Management",
-      "Windows Server Management",
-      "Cloud Infrastructure",
-      "Infrastructure Automation",
-      "CI/CD",
-      "Terraform",
-      "Office 365 Migration",
-      "Google Workspace",
-      "Server Management",
-      "Cloud Migration"
-    ],
-    "hasCredential": [
-      {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "certification",
-        "name": "AWS Certified Cloud Practitioner"
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "certification",
-        "name": "Google Workspace Administrator"
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "certification",
-        "name": "GitHub Foundations"
-      }
-    ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Webspiders Interweb Pvt. Ltd."
-    },
-    "sameAs": [
-      "https://linkedin.com/in/pushpendra16",
-      "https://github.com/push1697",
-      "https://blog.overflowbyte.cloud"
-    ]
-  };
+  return <div className="portfolio-shell">
+    <a href="#main" className="skip-link">Skip to content</a>
+    <header className="site-header glass">
+      <a className="brand" href="#home"><b>PD</b><span>/ INFRA</span></a>
+      <nav>{nav.map((item) => <a key={item} className={active === item ? 'active' : ''} href={`#${item}`}>{item}</a>)}</nav>
+      <div className="header-actions"><a className="button ghost" href="/pushpendra-resume.pdf" download><Download /> Resume</a><a className="button primary" href="https://www.linkedin.com/in/pushpendra16/" target="_blank"><Linkedin /> LinkedIn</a></div>
+      <button className="menu-toggle" onClick={() => setMenu(!menu)} aria-expanded={menu}>{menu ? <X /> : <Menu />}</button>
+      {menu && <div className="mobile-nav glass">{nav.map((item) => <a key={item} href={`#${item}`} onClick={() => setMenu(false)}>{item}</a>)}</div>}
+    </header>
 
-  const experiences = [
-    {
-      title: "Server Administrator",
-      company: "Webspiders Interweb Pvt. Ltd.",
-      period: "Sep 2023 - Present",
-      location: "Jaipur, Rajasthan",
-      highlights: [
-        "Leading L1 technical support team with 95%+ SLA compliance",
-        "Executed 50+ Office 365 & Google Workspace migrations",
-        "Deployed AWS infrastructure (EC2, S3, IAM, VPC)",
-        "Reduced manual intervention by 40% with n8n automation"
-      ]
-    },
-    {
-      title: "AWS Intern",
-      company: "LinuxWorld Informatics Pvt Ltd",
-      period: "Jul 2023 - Sep 2023",
-      location: "Jaipur, Rajasthan",
-      highlights: [
-        "Implemented IaC using Terraform and Ansible",
-        "Worked on Docker and Kubernetes projects",
-        "Designed CI/CD pipelines for automated deployments"
-      ]
-    },
-    {
-      title: "Windows Server Administrator",
-      company: "CloudTechtiq Technologies",
-      period: "Feb 2023 - Jun 2023",
-      location: "Jaipur, Rajasthan",
-      highlights: [
-        "Maintained 99.9% uptime for production services",
-        "Managed SSL certificates and security updates",
-        "Delivered SLA-aligned solutions to enterprise clients"
-      ]
-    }
-  ];
-
-  const skills = [
-    { category: "Cloud & DevOps", items: ["AWS (EC2, S3, VPC, IAM)", "Docker", "Kubernetes", "Terraform", "CI/CD Pipelines"] },
-    { category: "Server Administration", items: ["Windows Server", "Linux (Ubuntu, RHEL)", "Plesk Panel", "IIS", "DNS Management"] },
-    { category: "Email & Collaboration", items: ["Office 365 Migrations", "Google Workspace", "Cross-Mail Exchange"] },
-    { category: "Databases & Monitoring", items: ["MSSQL", "MySQL", "Zabbix", "n8n Automation"] }
-  ];
-
-  const certifications = [
-    "AWS Certified Cloud Practitioner",
-    "Google Workspace Administrator",
-    "GitHub Foundations",
-    "Information Technology Fundamentals - IBM",
-    "Currently Pursuing: AWS Solutions Architect Associate"
-  ];
-
-  const projects: Array<{
-    title: string;
-    description: string;
-    tags: string[];
-    link?: string;
-  }> = [
-    {
-      title: "n8n Production Deployment with Docker",
-      description: "Comprehensive guide to deploying n8n workflow automation platform in production using Docker, including SSL setup, reverse proxy configuration, and security best practices.",
-      tags: ["Docker", "n8n", "Automation", "DevOps", "Production"],
-      link: "https://blog.overflowbyte.cloud/the-comprehensive-guide-to-deploying-n8n-in-production-a-docker-deployment-journey"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
-      {/* JSON-LD Structured Data for SEO */}
-      <Script
-        id="structured-data"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      
-      {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
-              <Terminal className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
-              <span className="text-base md:text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Pushpendra
-              </span>
-            </div>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              {['home', 'about', 'experience', 'skills', 'projects', 'certifications', 'blog', 'contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => item === 'blog' ? window.location.href = '/blog' : scrollToSection(item)}
-                  className={`capitalize hover:text-cyan-400 transition-colors ${activeSection === item ? 'text-cyan-400' : 'text-gray-300'}`}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+    <main id="main">
+      <section id="home" className="hero section-grid">
+        <div className="hero-copy reveal-on-scroll">
+          <div className="availability"><i className="status-dot" /> Infrastructure · Cloud · Operations</div>
+          <h1><span>Pushpendra</span><br />Dev</h1>
+          <h2>Infrastructure System Engineer</h2>
+          <p>I design, implement, troubleshoot, and operate the systems that keep modern workplaces connected—from enterprise networks and FortiGate routing to AWS infrastructure, Windows/Linux operations, automation, and cloud-native deployment.</p>
+          <div className="location"><MapPin /> Based in Jaipur, India · Open to infrastructure, cloud operations, DevOps & implementation roles</div>
+          <div className="hero-actions"><a className="button primary large" href="#experience">View Experience <ArrowRight /></a><a className="button ghost large" href="/pushpendra-resume.pdf" download><Download /> Download Resume</a></div>
+          <div className="socials"><a href="https://www.linkedin.com/in/pushpendra16/" target="_blank" aria-label="LinkedIn"><Linkedin /></a><a href="https://github.com/push1697" target="_blank" aria-label="GitHub"><Github /></a><a href="mailto:push1697@gmail.com" aria-label="Email"><Mail /></a></div>
         </div>
+        <Topology />
+      </section>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-slate-900/95 backdrop-blur-md">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {['home', 'about', 'experience', 'skills', 'projects', 'certifications', 'blog', 'contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => item === 'blog' ? window.location.href = '/blog' : scrollToSection(item)}
-                  className="block w-full text-left px-3 py-2 capitalize hover:bg-purple-800/50 rounded-lg transition-colors"
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
+      <section className="metrics">
+        {[['400+', 'Seat office rollout', Users], ['100+', 'Enterprise migrations', Cloud], ['95%+', 'SLA compliance', Activity], ['3 yrs', 'Infrastructure experience', BriefcaseBusiness]].map(([value, label, Icon]) =>
+          <div key={label as string} className="metric reveal-on-scroll"><Icon className="metric-icon" /><strong>{value as string}</strong><span>{label as string}</span></div>)}
+      </section>
 
-      {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl -top-48 -left-48 animate-pulse"></div>
-          <div className="absolute w-96 h-96 bg-purple-500/20 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse delay-1000"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="animate-fade-in text-center md:text-left mt-16 md:mt-0">
-              <div className="mb-6 md:mb-8 flex justify-center md:justify-start space-x-4">
-              <Cloud className="w-10 h-10 md:w-12 md:h-12 text-cyan-400 md:animate-bounce" />
-              <Server className="w-10 h-10 md:w-12 md:h-12 text-purple-400 md:animate-bounce md:delay-100" />
-              <Code className="w-10 h-10 md:w-12 md:h-12 text-pink-400 md:animate-bounce md:delay-200" />
-              </div>
-              
-              <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Pushpendra
-              </h1>
-              
-              <p className="text-xl md:text-3xl mb-3 md:mb-4 text-gray-300">
-                Server & Cloud Engineer
-              </p>
-              
-              <p className="text-base md:text-xl mb-6 md:mb-8 text-gray-400 max-w-2xl mx-auto md:mx-0">
-                AWS Certified | DevOps Enthusiast | Building Scalable Cloud Infrastructure
-              </p>
-              
-              <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 mb-8 md:mb-12">
-              <a href="mailto:push1697@gmail.com" className="flex items-center space-x-2 bg-cyan-500/20 hover:bg-cyan-500/30 px-6 py-3 rounded-lg transition-all transform hover:scale-105">
-                <Mail className="w-5 h-5" />
-                <span>Email</span>
-              </a>
-              <a href="https://linkedin.com/in/pushpendra16" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-purple-500/20 hover:bg-purple-500/30 px-6 py-3 rounded-lg transition-all transform hover:scale-105">
-                <Linkedin className="w-5 h-5" />
-                <span>LinkedIn</span>
-              </a>
-              <a href="https://github.com/push1697" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-pink-500/20 hover:bg-pink-500/30 px-6 py-3 rounded-lg transition-all transform hover:scale-105">
-                <Github className="w-5 h-5" />
-                <span>GitHub</span>
-              </a>
-              </div>
-
-              <button onClick={() => scrollToSection('about')} className="hidden md:block animate-bounce mx-auto md:mx-0">
-                <ChevronDown className="w-8 h-8 text-cyan-400" />
-              </button>
-            </div>
-
-            {/* Right: Profile image */}
-            <div className="flex justify-center md:justify-end">
-              <div className="relative w-56 h-56 md:w-80 md:h-80">
-                <div className="absolute -inset-6 md:-inset-8 rounded-full border-2 border-dashed border-cyan-400/40 animate-[spin_18s_linear_infinite]" />
-                <div className="absolute -inset-3 md:-inset-4 rounded-full border-2 border-purple-400/30" />
-                <Image
-                  src="/new_image.jpg"
-                  alt="Pushpendra portrait"
-                  width={420}
-                  height={420}
-                  priority
-                  className="rounded-full object-cover w-full h-full border-4 border-slate-900 shadow-2xl relative z-10"
-                />
-              </div>
-            </div>
-          </div>
+      <section id="about" className="content-section">
+        <SectionTitle number="02" label="About">Infrastructure from <span>rack to cloud</span></SectionTitle>
+        <div className="about-grid">
+          <div className="about-copy reveal-on-scroll"><p>I&apos;m an Infrastructure and Cloud Engineer with three years of experience across enterprise rollouts, networking, Windows and Linux systems, cloud operations, workplace technology, and SLA-driven support.</p><p>Most recently, I contributed substantially to commissioning a new office designed for more than 400 users—covering switching, leased lines, <b>FortiGate SD-WAN</b>, wireless, endpoints, biometric systems, failover, and conference-room technology.</p><p>I combine hands-on implementation and incident ownership with AWS, monitoring, automation, documentation, and modern deployment practices.</p></div>
+          <div className="about-cards">{[['Implement', 'Planning, installation, configuration, testing, and operational handover.', Network], ['Operate', 'Monitoring, incident ownership, RCA, SLA support, and service continuity.', Activity], ['Improve', 'Automation, preventive troubleshooting, resilient design, and documentation.', Zap]].map(([title, text, Icon]) => <article className="glass reveal-on-scroll" key={title as string}><Icon /><h3>{title as string}</h3><p>{text as string}</p></article>)}</div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 p-8 rounded-2xl border border-cyan-500/20 backdrop-blur-sm">
-                  <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                    Server and Cloud Engineer with <span className="text-cyan-400 font-semibold">2+ years of hands-on experience</span> in Windows server administration, cloud infrastructure management, and automation.
-                  </p>
-                  <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                    Proven expertise in <span className="text-purple-400 font-semibold">Office 365 & Google Workspace migrations</span>, AWS cloud deployments, and CI/CD pipelines. Currently pursuing AWS Solutions Architect certification.
-                  </p>
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    Passionate about building scalable, reliable, and automated infrastructure that empowers businesses to grow efficiently.
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 p-6 rounded-xl border border-cyan-500/30 transform hover:scale-105 transition-transform">
-                  <Server className="w-10 h-10 text-cyan-400 mb-4" />
-                  <h3 className="text-2xl font-bold text-cyan-400 mb-2">50+</h3>
-                  <p className="text-gray-300">Migrations Completed</p>
-                </div>
-                
-                <div className="bg-gradient-to-br from-purple-500/20 to-purple-500/5 p-6 rounded-xl border border-purple-500/30 transform hover:scale-105 transition-transform">
-                  <Shield className="w-10 h-10 text-purple-400 mb-4" />
-                  <h3 className="text-2xl font-bold text-purple-400 mb-2">95%+</h3>
-                  <p className="text-gray-300">SLA Compliance</p>
-                </div>
-                
-                <div className="bg-gradient-to-br from-pink-500/20 to-pink-500/5 p-6 rounded-xl border border-pink-500/30 transform hover:scale-105 transition-transform">
-                  <Database className="w-10 h-10 text-pink-400 mb-4" />
-                  <h3 className="text-2xl font-bold text-pink-400 mb-2">99.9%</h3>
-                  <p className="text-gray-300">Server Uptime</p>
-                </div>
-                
-                <div className="bg-gradient-to-br from-green-500/20 to-green-500/5 p-6 rounded-xl border border-green-500/30 transform hover:scale-105 transition-transform">
-                  <Code className="w-10 h-10 text-green-400 mb-4" />
-                  <h3 className="text-2xl font-bold text-green-400 mb-2">40%</h3>
-                  <p className="text-gray-300">Automation Gain</p>
-                </div>
-              </div>
-            </div>
+      <section id="experience" className="content-section">
+        <SectionTitle number="03" label="Experience">Systems operated. <span>Impact delivered.</span></SectionTitle>
+        <div className="timeline">{experiences.map((exp, i) => <article className="experience-card glass reveal-on-scroll" key={exp.company}><div className="timeline-marker"><span>0{i + 1}</span></div><div className="exp-head"><div><h3>{exp.role}</h3><h4>{exp.company}</h4></div><div><b>{exp.period}</b><span><MapPin /> {exp.location}</span></div></div><ul>{exp.points.map((point) => <li key={point}><ChevronDown />{point}</li>)}</ul></article>)}</div>
+      </section>
+
+      <section id="capabilities" className="content-section">
+        <SectionTitle number="04" label="Capabilities">Operational <span>capabilities</span></SectionTitle>
+        <p className="section-lead reveal-on-scroll">Click a capability to deploy its skill stack.</p>
+        <div className="capability-grid">{capabilities.map((group, i) => <CapabilityCard key={group.title} group={group} index={i} />)}</div>
+      </section>
+
+      <section id="projects" className="content-section">
+        <SectionTitle number="05" label="Projects">Infrastructure <span>in practice</span></SectionTitle>
+        <div className="project-grid">{projects.map((project) => { const Icon = project.icon; return <article className="project-card glass reveal-on-scroll" key={project.title}><div className="project-top"><span>{project.n}</span><Icon /></div><div className="mini-architecture"><i /><i /><i /><b /></div><h3>{project.title}</h3><p>{project.description}</p><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>{project.link && <a href={project.link} target="_blank">Read case study <ExternalLink /></a>}</article>; })}</div>
+      </section>
+
+      <section id="learning" className="content-section">
+        <SectionTitle number="06" label="Learning">Expanding the <span>operating surface</span></SectionTitle>
+        <div className="learning-grid">{learning.map(({ title, status, icon: Icon, items }) => <article className="learning-card glass reveal-on-scroll" key={title}><div><span className="icon-box"><Icon /></span><b>{status}</b></div><h3>{title}</h3><ul>{items.map((item) => <li key={item}><i />{item}</li>)}</ul></article>)}</div>
+      </section>
+
+      <section id="certifications" className="content-section">
+        <SectionTitle number="07" label="Credentials">Certifications & <span>education</span></SectionTitle>
+        <div className="credentials-grid">
+          <article className="glass reveal-on-scroll"><h3><Award /> Certifications</h3><ul>{['AWS Certified Cloud Practitioner', 'Google Cloud Certified Professional Google Workspace Administrator', 'GitHub Foundations', 'IT Security — Google / Coursera', 'Technical Support Fundamentals — Google / Coursera', 'Advanced DevOps & Cloud Technologies — ARTH', 'AWS Solutions Architect Associate — Pursuing'].map((item) => <li key={item}><i />{item}</li>)}</ul></article>
+          <article className="glass reveal-on-scroll"><h3><GraduationCap /> Education</h3><div className="education"><b>Bachelor of Technology, Computer Science</b><span>Suresh Gyan Vihar University</span><small>2022 — 2026</small></div><div className="education"><b>Diploma, Computer Science & Engineering</b><span>Suresh Gyan Vihar University</span><small>2019 — 2022 · CGPA 7.60 / 10</small></div></article>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Experience
-          </h2>
-          
-          <div className="space-y-8">
-            {experiences.map((exp, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-8 rounded-2xl border border-cyan-500/20 backdrop-blur-sm hover:border-cyan-500/40 transition-all transform hover:scale-[1.02]">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-cyan-400 mb-2">{exp.title}</h3>
-                    <p className="text-xl text-purple-400">{exp.company}</p>
-                  </div>
-                  <div className="text-gray-400 mt-2 md:mt-0 text-right">
-                    <p>{exp.period}</p>
-                    <p>{exp.location}</p>
-                  </div>
-                </div>
-                
-                <ul className="space-y-2 mt-4">
-                  {exp.highlights.map((highlight, i) => (
-                    <li key={i} className="text-gray-300 flex items-start">
-                      <span className="text-cyan-400 mr-3">▸</span>
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+      <section id="contact" className="content-section">
+        <div className="contact-panel glass reveal-on-scroll"><div className="eyebrow"><i />08 · Contact</div><h2>Let&apos;s build infrastructure that <span>stays ready.</span></h2><p>I&apos;m open to infrastructure engineering, cloud operations, implementation, DevOps, and enterprise support opportunities.</p>
+          <div className="contact-grid"><button onClick={copyEmail}><span className="icon-box"><Mail /></span><span><small>Email</small>push1697@gmail.com</span>{copied ? <Check /> : <Copy />}</button><a href="https://www.linkedin.com/in/pushpendra16/" target="_blank"><span className="icon-box"><Linkedin /></span><span><small>LinkedIn</small>/in/pushpendra16</span></a><a href="https://github.com/push1697" target="_blank"><span className="icon-box violet"><Github /></span><span><small>GitHub</small>@push1697</span></a></div>
+          <div className="hero-actions"><a className="button primary large" href="/pushpendra-resume.pdf" download><Download /> Download Resume</a><a className="button ghost large" href="mailto:push1697@gmail.com"><Mail /> Send an email</a></div>
+          <div className="contact-meta"><span><MapPin /> Jaipur, Rajasthan, India</span><span><i className="status-dot" /> Open to relocation & rotational / follow-the-sun shifts</span></div>
         </div>
       </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Skills & Expertise
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.map((skillGroup, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all">
-                <h3 className="text-xl font-bold text-cyan-400 mb-4">{skillGroup.category}</h3>
-                <ul className="space-y-2">
-                  {skillGroup.items.map((item, i) => (
-                    <li key={i} className="text-gray-300 flex items-center">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Projects
-          </h2>
-          <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
-            A curated set of hands-on projects. I’ll add details soon.
-          </p>
-
-          {projects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((p, idx) => (
-                <div key={idx} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all">
-                  <h3 className="text-xl font-semibold text-white mb-2">{p.title}</h3>
-                  <p className="text-gray-300 mb-4">{p.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {p.tags.map((t) => (
-                      <span key={t} className="text-xs px-2 py-1 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  {p.link && (
-                    <a href={p.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200">
-                      <ExternalLink className="w-4 h-4" /> View project
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1,2,3].map((i) => (
-                <div key={i} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 rounded-xl border border-cyan-500/20">
-                  <div className="h-6 w-2/3 bg-slate-700/60 rounded mb-3" />
-                  <div className="h-4 w-full bg-slate-700/50 rounded mb-2" />
-                  <div className="h-4 w-5/6 bg-slate-700/40 rounded mb-4" />
-                  <div className="flex gap-2">
-                    <span className="h-6 w-16 bg-slate-700/40 rounded" />
-                    <span className="h-6 w-20 bg-slate-700/40 rounded" />
-                    <span className="h-6 w-12 bg-slate-700/40 rounded" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Certifications Section */}
-      <section id="certifications" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Certifications & Credentials
-          </h2>
-          
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-8 rounded-2xl border border-cyan-500/20">
-              <div className="space-y-4">
-                {certifications.map((cert, idx) => (
-                  <div key={idx} className="flex items-start">
-                    <Award className={`w-6 h-6 mr-4 mt-1 flex-shrink-0 ${cert.includes('Currently') ? 'text-purple-400' : 'text-cyan-400'}`} />
-                    <span className={`text-lg ${cert.includes('Currently') ? 'text-purple-300 italic' : 'text-gray-300'}`}>{cert}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Blog CTA Section */}
-      <section className="py-20 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Read My Technical Blog
-          </h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            Explore in-depth articles on cloud infrastructure, DevOps practices, and real-world engineering solutions
-          </p>
-          <Link
-            href="/blog"
-            className="inline-block bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105"
-          >
-            Visit Blog
-          </Link>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Let&apos;s Connect
-          </h2>
-
-          <p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
-            I&apos;m always interested in hearing about new projects, opportunities, and collaborations. Feel free to reach out!
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-6">
-            <a
-              href="mailto:push1697@gmail.com"
-              className="flex items-center space-x-2 bg-cyan-500/20 hover:bg-cyan-500/30 px-8 py-4 rounded-lg transition-all transform hover:scale-105"
-            >
-              <Mail className="w-6 h-6" />
-              <span>Email Me</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/pushpendra16"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-purple-500/20 hover:bg-purple-500/30 px-8 py-4 rounded-lg transition-all transform hover:scale-105"
-            >
-              <Linkedin className="w-6 h-6" />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href="https://github.com/push1697"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-pink-500/20 hover:bg-pink-500/30 px-8 py-4 rounded-lg transition-all transform hover:scale-105"
-            >
-              <Github className="w-6 h-6" />
-              <span>GitHub</span>
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+    </main>
+    <footer><div className="brand"><b>PD</b><span><strong>Pushpendra Dev</strong>Infrastructure System Engineer</span></div><p>Designed around infrastructure, reliability, and continuous learning.</p><span>© {year} · Pushpendra Dev</span></footer>
+  </div>;
 }
