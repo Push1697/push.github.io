@@ -169,12 +169,12 @@ Infrastructure Experience
 ## 📈 GitHub Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=push1697&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00C7FF&icon_color=00C7FF&text_color=FFFFFF" alt="GitHub Stats" height="170"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=push1697&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00C7FF&text_color=FFFFFF" alt="Top Languages" height="170"/>
+  <img src="https://github-readme-stats-nine-rho.vercel.app/api?username=push1697&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00C7FF&icon_color=00C7FF&text_color=FFFFFF" alt="GitHub Stats" height="170"/>
+  <img src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=push1697&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00C7FF&text_color=FFFFFF" alt="Top Languages" height="170"/>
 </div>
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=push1697&theme=tokyonight&hide_border=true&background=0D1117&stroke=00C7FF&ring=00C7FF&fire=FF6B6B&currStreakLabel=00C7FF" alt="GitHub Streak" />
+  <img src="https://github-readme-streak-stats-lake.vercel.app/?user=push1697&theme=tokyonight&hide_border=true&background=0D1117&stroke=00C7FF&ring=00C7FF&fire=FF6B6B&currStreakLabel=00C7FF" alt="GitHub Streak" />
 </div>
 
 <div align="center">
@@ -244,6 +244,20 @@ const currentFocus = {
     goal: 'Become AWS Solutions Architect Associate certified & operate infrastructure from rack to cloud'
 };
 ```
+
+---
+
+## 🧠 Learning Log
+
+_Updated roughly every 2 weeks. Also mirrored on **[learning.overflowbyte.cloud](https://learning.overflowbyte.cloud)** and referenced from **[blog.overflowbyte.cloud](https://blog.overflowbyte.cloud)** — timing of full cross-sync across those platforms is still my call, but this README is the source of truth in the meantime._
+
+| | This entry |
+|---|---|
+| 📅 **This week I'm learning** | _add this week's topic_ |
+| 📖 **Book I'm reading** | _add current book_ |
+| 📄 **Research paper (last 15 days)** | _add paper title + link_ |
+
+<sub>Last updated: _add date_</sub>
 
 ---
 
