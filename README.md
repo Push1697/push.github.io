@@ -303,6 +303,6 @@ npm run dev
 
 **⭐ If you find my work interesting, consider giving a star to my repositories! ⭐**
 
-![Snake animation](https://raw.githubusercontent.com/push1697/push1697/output/github-contribution-grid-snake-dark.svg)
+![Snake animation](https://raw.githubusercontent.com/Push1697/push.github.io/output/github-contribution-grid-snake-dark.svg)
 
 </div>
