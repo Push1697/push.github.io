@@ -8,7 +8,7 @@ type Vec2 = readonly [number, number];
 
 // Mirrors the node layout used by the HTML topology markers in page.tsx.
 const NODE_POSITIONS: Vec2[] = [
-  [50, 8], [82, 27], [91, 58], [75, 83], [40, 90], [15, 76], [8, 44], [22, 20],
+  [50, 8], [82, 27], [91, 58], [75, 83], [50, 91], [15, 76], [8, 44], [22, 20],
 ];
 
 const ACCENTS = ['#66e8ff', '#58dfa7', '#ffc46b'] as const;

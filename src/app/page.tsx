@@ -199,7 +199,7 @@ function Topology() {
   const nodes = [
     ['FortiGate', 82, 27, Shield], ['AWS', 91, 58, Cloud], ['Linux', 15, 76, Server],
     ['Kubernetes', 22, 20, Network], ['Docker', 8, 44, Package], ['Zabbix', 75, 83, Activity],
-    ['Windows Server', 40, 90, Monitor], ['Networking', 50, 8, Wifi],
+    ['Windows Server', 50, 91, Monitor], ['Networking', 50, 8, Wifi],
   ] as const;
   const canUse3D = useCanUse3D();
 
@@ -219,7 +219,7 @@ function Topology() {
     <div className="packet packet-a">SD-WAN</div>
     <div className="packet packet-b">IaC</div>
     <div className="packet packet-c">SLA</div>
-    <div className="telemetry glass"><i className="status-dot" /> uptime <strong>99.98%</strong><em>•</em> latency <strong>18ms</strong></div>
+    <div className="telemetry glass"><i className="status-dot" /><strong>99.98%</strong><em>/</em><strong>18ms</strong></div>
   </div>;
 }
 
