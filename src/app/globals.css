@@ -1565,6 +1565,209 @@ footer {
   flex: none;
 }
 
+.this-week {
+  margin-top: 20px;
+  padding: 26px 28px;
+  border-radius: var(--radius);
+}
+
+.this-week-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.this-week-item {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+}
+
+.this-week-item > div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.this-week-item b {
+  font: 10px var(--font-mono), monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.this-week-item span,
+.this-week-item a {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #d4d9e2;
+}
+
+.this-week-item a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-decoration-color: rgba(102, 232, 255, .35);
+  text-underline-offset: 3px;
+}
+
+.this-week-item .soon {
+  color: var(--muted-2);
+  font-style: italic;
+}
+
+.sync-link {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font: 11px var(--font-mono), monospace;
+  transition: color .2s ease;
+}
+
+.sync-link svg { width: 13px; }
+.sync-link:hover { color: var(--cyan); }
+
+.sub-head {
+  margin-top: 52px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sub-head h3 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.sub-head p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.bookshelf-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.book-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(102, 232, 255, .35);
+  box-shadow: 0 20px 60px -34px rgba(102, 232, 255, .4);
+}
+
+.book-card svg {
+  color: var(--cyan);
+  width: 22px;
+  flex: none;
+}
+
+.book-card b {
+  display: block;
+  font-size: 14px;
+}
+
+.book-card span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.empty-panel {
+  margin-top: 24px;
+  padding: 28px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.empty-panel svg {
+  color: var(--cyan);
+  width: 26px;
+  flex: none;
+}
+
+.empty-panel a { color: var(--cyan); }
+
+.resource-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.resource-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border-radius: var(--radius);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(102, 232, 255, .35);
+  box-shadow: 0 20px 60px -34px rgba(102, 232, 255, .4);
+}
+
+.resource-card-soon { opacity: .68; }
+
+.resource-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--cyan);
+  font: 10px var(--font-mono), monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.resource-kind svg { width: 13px; height: 13px; }
+
+.resource-card b {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.resource-card > span:last-of-type {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.resource-card .soon {
+  color: var(--muted-2);
+  font: 10px var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.resource-go {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 14px;
+  color: var(--muted);
+}
+
 .credentials-grid {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
@@ -1972,7 +2175,9 @@ footer p { max-width: 360px; }
   .about-grid { grid-template-columns: 1fr; }
 
   .project-grid,
-  .capability-grid { grid-template-columns: repeat(2, 1fr); }
+  .capability-grid,
+  .bookshelf-grid,
+  .resource-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 700px) {
@@ -2030,6 +2235,9 @@ footer p { max-width: 360px; }
   .project-grid,
   .learning-grid,
   .credentials-grid,
+  .this-week-grid,
+  .bookshelf-grid,
+  .resource-grid,
   .contact-grid { grid-template-columns: 1fr; }
 
   .timeline { padding-left: 0; }

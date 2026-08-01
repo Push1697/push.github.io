@@ -9,16 +9,16 @@ import MiniArchitecture, { type ArchKind } from '@/components/MiniArchitecture';
 import { SplitLetters } from '@/lib/splitText';
 import { useCanUse3D } from '@/lib/useCanUse3D';
 import {
-  Activity, ArrowRight, Award, BriefcaseBusiness, Check, ChevronDown,
-  Cloud, Code2, Copy, Database, Download, ExternalLink, Github, GraduationCap,
-  Headphones, Linkedin, Mail, MapPin, Menu, Monitor, Network, Package, Server,
+  Activity, ArrowRight, Award, BookOpen, BriefcaseBusiness, Check, ChevronDown,
+  Cloud, Code2, Copy, Database, Download, ExternalLink, FileText, Github, GraduationCap,
+  Headphones, Linkedin, ListVideo, Mail, MapPin, Menu, Monitor, Network, Package, Server,
   Shield, Sparkles, Terminal, Users, Wifi, X, Zap,
 } from 'lucide-react';
 import type { IconType } from 'react-icons';
-import { FaAws, FaDatabase, FaDocker, FaLinux, FaShieldAlt, FaWindows } from 'react-icons/fa';
+import { FaAws, FaDatabase, FaDocker, FaLinux, FaShieldAlt, FaWindows, FaYoutube } from 'react-icons/fa';
 import {
   SiAnsible, SiFortinet, SiGnubash, SiKubernetes, SiMysql, SiN8N,
-  SiNginx, SiPlesk, SiPrometheus, SiTerraform,
+  SiNginx, SiPlesk, SiPrometheus, SiTerraform, SiUdemy,
 } from 'react-icons/si';
 import {
   TbBrandGoogle, TbBrandOffice, TbBrandPowershell, TbBrandZoom, TbCloudComputing,
@@ -76,6 +76,28 @@ const learning = [
   { title: 'Contact-center technology', status: 'Actively learning', icon: Headphones, items: ['SIP', 'VoIP', 'PRI', 'IVR', 'ACD', 'CTI'] },
   { title: 'AWS architecture', status: 'Actively learning', icon: Cloud, items: ['Solutions Architect Associate', 'Resilient architecture', 'Secure IaC', 'Auto scaling', 'Monitoring', 'Cost optimization'] },
 ];
+
+const thisWeek = {
+  focus: 'Talos Linux cluster networking and GitOps workflows for the AWS Solutions Architect track',
+  book: null as { title: string; author: string; link: string } | null,
+  paper: null as { title: string; link: string } | null,
+};
+
+const bookshelf: { title: string; author: string; link: string }[] = [];
+
+const recommendedLearning: { kind: 'udemy' | 'youtube' | 'playlist'; title: string; creator: string; link?: string }[] = [
+  { kind: 'udemy', title: 'AWS Certified Solutions Architect — Associate', creator: 'Stephane Maarek', link: 'https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/' },
+  { kind: 'youtube', title: 'Kubernetes & DevOps deep dives', creator: 'TechWorld with Nana', link: 'https://www.youtube.com/@TechWorldwithNana' },
+  { kind: 'playlist', title: 'My curated infra & cloud playlist', creator: 'Pushpendra Dev' },
+];
+
+const resourceLabel: Record<string, string> = { udemy: 'Udemy', youtube: 'YouTube', playlist: 'Playlist' };
+
+function ResourceIcon({ kind }: { kind: 'udemy' | 'youtube' | 'playlist' }) {
+  if (kind === 'udemy') return <SiUdemy />;
+  if (kind === 'youtube') return <FaYoutube />;
+  return <ListVideo />;
+}
 
 type SkillLogoConfig = { kind: string; mark: string; accent: string; BrandIcon?: IconType };
 
@@ -362,6 +384,31 @@ export default function Home() {
       <section id="learning" className="content-section">
         <SectionTitle number="06" label="Learning">Expanding the <span>operating surface</span></SectionTitle>
         <div className="learning-grid">{learning.map(({ title, status, icon: Icon, items }, i) => <article className="learning-card glass reveal-on-scroll" data-reveal="tilt-left" style={{ '--delay': `${i * 80}ms` } as React.CSSProperties} key={title}><div><span className="icon-box"><Icon /></span><b>{status}</b></div><h3>{title}</h3><ul>{items.map((item) => <li key={item}><i />{item}</li>)}</ul></article>)}</div>
+
+        <div className="this-week glass reveal-on-scroll" data-reveal="rise">
+          <div className="eyebrow"><i /> This week</div>
+          <div className="this-week-grid">
+            <div className="this-week-item"><span className="icon-box"><Sparkles /></span><div><b>Focus</b><span>{thisWeek.focus}</span></div></div>
+            <div className="this-week-item"><span className="icon-box violet"><BookOpen /></span><div><b>Reading</b>{thisWeek.book ? <a href={thisWeek.book.link} target="_blank">{thisWeek.book.title} — {thisWeek.book.author}</a> : <span className="soon">Updating soon</span>}</div></div>
+            <div className="this-week-item"><span className="icon-box"><FileText /></span><div><b>Paper · last 15 days</b>{thisWeek.paper ? <a href={thisWeek.paper.link} target="_blank">{thisWeek.paper.title}</a> : <span className="soon">Updating soon</span>}</div></div>
+          </div>
+          <a className="sync-link" href="https://learning.overflowbyte.cloud" target="_blank"><ExternalLink /> Full log synced at learning.overflowbyte.cloud</a>
+        </div>
+
+        <div className="sub-head reveal-on-scroll" data-reveal="rise"><h3>Bookshelf</h3><p>Books shaping how I think about systems and engineering.</p></div>
+        {bookshelf.length > 0 ? (
+          <div className="bookshelf-grid">{bookshelf.map((b, i) => <a key={b.title} className="book-card glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties} href={b.link} target="_blank"><BookOpen /><div><b>{b.title}</b><span>{b.author}</span></div></a>)}</div>
+        ) : (
+          <div className="empty-panel glass reveal-on-scroll" data-reveal="rise"><BookOpen /><p>Building this list — the full shelf will live at <a href="https://learning.overflowbyte.cloud" target="_blank">learning.overflowbyte.cloud</a>.</p></div>
+        )}
+
+        <div className="sub-head reveal-on-scroll" data-reveal="rise"><h3>Recommended learning</h3><p>Courses and videos I&apos;d point a teammate to.</p></div>
+        <div className="resource-grid">{recommendedLearning.map((r, i) => {
+          const body = <><span className="resource-kind"><ResourceIcon kind={r.kind} /> {resourceLabel[r.kind]}</span><b>{r.title}</b><span>{r.creator}</span></>;
+          return r.link
+            ? <a key={r.title} className="resource-card glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties} href={r.link} target="_blank">{body}<ExternalLink className="resource-go" /></a>
+            : <div key={r.title} className="resource-card resource-card-soon glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties}>{body}<span className="soon">Coming soon</span></div>;
+        })}</div>
       </section>
 
       <section id="certifications" className="content-section">
