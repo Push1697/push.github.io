@@ -179,15 +179,16 @@ function SkillLogo({ skill, icon: Icon }: { skill: string; icon: LucideIcon }) {
 
 function CapabilityCard({ group, index }: { group: typeof capabilities[number]; index: number }) {
   const [burst, setBurst] = useState(0);
+  const triggerBurst = () => setBurst((v) => v + 1);
   const Icon = group.icon;
   return (
     <button className="capability-card glass reveal-on-scroll" style={{ '--delay': `${index * 65}ms` } as React.CSSProperties}
       data-reveal={index % 2 ? 'tilt-right' : 'tilt-left'}
-      onClick={() => setBurst((v) => v + 1)} aria-label={`Show ${group.title} skill icons`}>
+      onMouseEnter={triggerBurst} onFocus={triggerBurst} onClick={triggerBurst} aria-label={`Show ${group.title} skill icons`}>
       <div className="cap-head"><span className="icon-box"><Icon /></span><span className="cap-index">0{index + 1}</span></div>
       <h3>{group.title}</h3>
       <div className="skill-grid">{group.items.map((item) => <span key={item}>{item}</span>)}</div>
-      <div className="cap-hint"><Sparkles /> Click to deploy skill stack</div>
+      <div className="cap-hint"><Sparkles /> Hover to deploy skill stack</div>
       {burst > 0 && <div key={burst} className="skill-burst" aria-hidden="true">
         {group.items.slice(0, 7).map((item, i) => <span key={item} className="skill-pop" style={{ '--i': i } as React.CSSProperties}><SkillLogo skill={item} icon={Icon} /><b>{item}</b></span>)}
       </div>}
