@@ -1,0 +1,38 @@
+{
+  "thisWeek": {
+    "focus": "Talos Linux cluster networking and GitOps workflows for the AWS Solutions Architect track",
+    "book": null,
+    "paper": {
+      "title": "The Story of AWS Glue",
+      "link": "https://drive.google.com/file/d/1aBOYX0yWdl_nkmguj0MW_nxqtqjY1i6H/view?usp=sharing"
+    }
+  },
+  "bookshelf": [],
+  "papershelf": [
+    {
+      "title": "The Story of AWS Glue",
+      "authors": "Mohit Saxena et al., AWS",
+      "link": "https://drive.google.com/file/d/1aBOYX0yWdl_nkmguj0MW_nxqtqjY1i6H/view?usp=sharing"
+    }
+  ],
+  "resources": [
+    {
+      "kind": "udemy",
+      "title": "AWS Certified Solutions Architect — Associate",
+      "creator": "Stephane Maarek",
+      "link": "https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/"
+    },
+    {
+      "kind": "youtube",
+      "title": "Kubernetes & DevOps deep dives",
+      "creator": "TechWorld with Nana",
+      "link": "https://www.youtube.com/@TechWorldwithNana"
+    },
+    {
+      "kind": "playlist",
+      "title": "My curated infra & cloud playlist",
+      "creator": "Pushpendra Dev",
+      "link": null
+    }
+  ]
+}

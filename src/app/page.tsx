@@ -1,25 +1,30 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import type { MouseEvent } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import MiniArchitecture, { type ArchKind } from '@/components/MiniArchitecture';
+import Header, { type NavItem } from '@/components/Header';
+import SectionTitle from '@/components/SectionTitle';
 import { SplitLetters } from '@/lib/splitText';
 import { useCanUse3D } from '@/lib/useCanUse3D';
 import { useTheme, type Theme } from '@/lib/useTheme';
+import { useRevealOnScroll } from '@/lib/useRevealOnScroll';
+import { learningRoadmap } from '@/data/learningRoadmap';
 import {
-  Activity, ArrowRight, Award, BookOpen, BriefcaseBusiness, Check, ChevronDown,
-  Cloud, Code2, Copy, Database, Download, ExternalLink, FileText, Github, GraduationCap,
-  Headphones, Linkedin, ListVideo, Mail, MapPin, Menu, Monitor, Moon, Network, Package, Server,
-  Shield, Sparkles, Sun, Terminal, Users, Wifi, X, Zap,
+  Activity, ArrowRight, Award, BriefcaseBusiness, Check, ChevronDown,
+  Cloud, Code2, Copy, Database, Download, ExternalLink, Github, GraduationCap,
+  Linkedin, Mail, MapPin, Monitor, Network, Package, Server,
+  Shield, Sparkles, Terminal, Users, Wifi, Zap,
 } from 'lucide-react';
 import type { IconType } from 'react-icons';
-import { FaAws, FaDatabase, FaDocker, FaLinux, FaShieldAlt, FaWindows, FaYoutube } from 'react-icons/fa';
+import { FaAws, FaDatabase, FaDocker, FaLinux, FaShieldAlt, FaWindows } from 'react-icons/fa';
 import {
   SiAnsible, SiFortinet, SiGnubash, SiKubernetes, SiMysql, SiN8N,
-  SiNginx, SiPlesk, SiPrometheus, SiTerraform, SiUdemy,
+  SiNginx, SiPlesk, SiPrometheus, SiTerraform,
 } from 'react-icons/si';
 import {
   TbBrandGoogle, TbBrandOffice, TbBrandPowershell, TbBrandZoom, TbCloudComputing,
@@ -30,6 +35,7 @@ const HeroScene = dynamic(() => import('@/components/HeroScene'), { ssr: false, 
 const GlobalWaveBackground = dynamic(() => import('@/components/GlobalWaveBackground'), { ssr: false, loading: () => null });
 
 const nav = ['home', 'about', 'experience', 'capabilities', 'projects', 'learning', 'certifications', 'contact'];
+const navItems: NavItem[] = nav.map((id) => ({ id, label: id, href: `#${id}` }));
 
 const experiences = [
   {
@@ -71,38 +77,6 @@ const projects: { n: string; title: string; description: string; tags: string[];
   { n: '05', title: 'Preventive Monitoring', description: 'Zabbix and Prometheus infrastructure monitoring with service-health automation and Slack/email alert workflows.', tags: ['Zabbix', 'Prometheus', 'Linux', 'Automation'], icon: Activity, archKind: 'monitoring' },
   { n: '06', title: 'Talos Linux Cluster Lab', description: 'Isolated Talos cluster using a dual-homed jump host, SSH tunnelling, and documented Flannel and CoreDNS troubleshooting.', tags: ['Talos', 'Kubernetes', 'Networking', 'Bastion'], icon: Network, archKind: 'talos' },
 ];
-
-const learning = [
-  { title: 'Cloud-native infrastructure', status: 'Lab practice', icon: Network, items: ['Advanced Kubernetes', 'Talos Linux', 'Helm', 'GitOps', 'Cluster networking', 'Production troubleshooting'] },
-  { title: 'Contact-center technology', status: 'Actively learning', icon: Headphones, items: ['SIP', 'VoIP', 'PRI', 'IVR', 'ACD', 'CTI'] },
-  { title: 'AWS architecture', status: 'Actively learning', icon: Cloud, items: ['Solutions Architect Associate', 'Resilient architecture', 'Secure IaC', 'Auto scaling', 'Monitoring', 'Cost optimization'] },
-];
-
-const thisWeek = {
-  focus: 'Talos Linux cluster networking and GitOps workflows for the AWS Solutions Architect track',
-  book: null as { title: string; author: string; link: string } | null,
-  paper: { title: 'The Story of AWS Glue', link: 'https://drive.google.com/file/d/1aBOYX0yWdl_nkmguj0MW_nxqtqjY1i6H/view?usp=sharing' } as { title: string; link: string } | null,
-};
-
-const bookshelf: { title: string; author: string; link: string }[] = [];
-
-const papershelf: { title: string; authors: string; link: string }[] = [
-  { title: 'The Story of AWS Glue', authors: 'Mohit Saxena et al., AWS', link: 'https://drive.google.com/file/d/1aBOYX0yWdl_nkmguj0MW_nxqtqjY1i6H/view?usp=sharing' },
-];
-
-const recommendedLearning: { kind: 'udemy' | 'youtube' | 'playlist'; title: string; creator: string; link?: string }[] = [
-  { kind: 'udemy', title: 'AWS Certified Solutions Architect — Associate', creator: 'Stephane Maarek', link: 'https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/' },
-  { kind: 'youtube', title: 'Kubernetes & DevOps deep dives', creator: 'TechWorld with Nana', link: 'https://www.youtube.com/@TechWorldwithNana' },
-  { kind: 'playlist', title: 'My curated infra & cloud playlist', creator: 'Pushpendra Dev' },
-];
-
-const resourceLabel: Record<string, string> = { udemy: 'Udemy', youtube: 'YouTube', playlist: 'Playlist' };
-
-function ResourceIcon({ kind }: { kind: 'udemy' | 'youtube' | 'playlist' }) {
-  if (kind === 'udemy') return <SiUdemy />;
-  if (kind === 'youtube') return <FaYoutube />;
-  return <ListVideo />;
-}
 
 type SkillLogoConfig = { kind: string; mark: string; accent: string; BrandIcon?: IconType };
 
@@ -159,14 +133,6 @@ const skillLogoMap: Record<string, SkillLogoConfig> = {
 
 function getSkillLogo(skill: string) {
   return skillLogoMap[skill] ?? { kind: 'stack', mark: skill.slice(0, 3).toUpperCase(), accent: '#66e8ff' };
-}
-
-function SectionTitle({ number, label, children }: { number: string; label: string; children: React.ReactNode }) {
-  return <div className="section-title reveal-on-scroll" data-reveal="rise">
-    <div className="eyebrow"><i />{number} · {label}</div>
-    <h2>{children}</h2>
-    <svg className="title-accent" viewBox="0 0 160 6" aria-hidden="true"><path d="M2,3 H158" /></svg>
-  </div>;
 }
 
 function SkillLogo({ skill, icon: Icon }: { skill: string; icon: LucideIcon }) {
@@ -234,44 +200,16 @@ export default function Home() {
   const shellRef = useRef<HTMLDivElement | null>(null);
   const canUse3D = useCanUse3D();
   const { theme, toggleTheme } = useTheme();
-  const [menu, setMenu] = useState(false);
-  const [active, setActive] = useState('home');
-  const navListRef = useRef<HTMLElement | null>(null);
-  const navLinkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
-  const [navIndicator, setNavIndicator] = useState({ left: 0, width: 0, ready: false });
   const [copied, setCopied] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  useEffect(() => {
-    const reveal = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible')), { threshold: .12 });
-    document.querySelectorAll('.reveal-on-scroll').forEach((el) => reveal.observe(el));
-    const sections = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)), { rootMargin: '-35% 0px -55%' });
-    nav.forEach((id) => { const el = document.getElementById(id); if (el) sections.observe(el); });
-    return () => { reveal.disconnect(); sections.disconnect(); };
-  }, []);
-
-  useEffect(() => {
-    const measure = () => {
-      const container = navListRef.current;
-      const link = navLinkRefs.current[active];
-      if (!container || !link) return;
-      const containerRect = container.getBoundingClientRect();
-      const linkRect = link.getBoundingClientRect();
-      setNavIndicator({ left: linkRect.left - containerRect.left, width: linkRect.width, ready: true });
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, [active, scrolled]);
+  useRevealOnScroll();
 
   useEffect(() => {
     let ticking = false;
     const updateScrollState = () => {
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      const progress = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
-      setScrollProgress(progress);
-      setScrolled(window.scrollY > 24);
+      setScrollProgress(Math.min(100, Math.max(0, (window.scrollY / max) * 100)));
       ticking = false;
     };
     const requestUpdate = () => {
@@ -327,24 +265,7 @@ export default function Home() {
     {canUse3D && theme === 'dark' && <div className="global-wave-bg" aria-hidden="true"><GlobalWaveBackground /></div>}
     <div className="cursor-glow" aria-hidden="true" style={{ opacity: Math.min(.6, .28 + scrollProgress / 260) } as React.CSSProperties} />
     <a href="#main" className="skip-link">Skip to content</a>
-    <header className={`site-header glass ${scrolled ? 'is-scrolled' : ''}`}>
-      <div className="scroll-progress" style={{ '--scroll-progress': `${scrollProgress}%` } as React.CSSProperties} />
-      <a className="brand" href="#home"><b>PD</b><span>/ INFRA</span></a>
-      <nav ref={navListRef}>
-        <span className="nav-indicator" style={{ transform: `translateX(${navIndicator.left}px)`, width: navIndicator.width, opacity: navIndicator.ready ? 1 : 0 } as React.CSSProperties} aria-hidden="true" />
-        {nav.map((item) => <a key={item} ref={(el) => { navLinkRefs.current[item] = el; }} className={active === item ? 'active' : ''} href={`#${item}`}>{item}</a>)}
-      </nav>
-      <div className="header-actions">
-        <button className="theme-toggle" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} aria-pressed={theme === 'light'}>{theme === 'dark' ? <Sun /> : <Moon />}</button>
-        <a className="button ghost" href="/pushpendra-resume.pdf" download><Download /> Resume</a>
-        <a className="button primary" href="https://www.linkedin.com/in/pushpendra16/" target="_blank"><Linkedin /> LinkedIn</a>
-      </div>
-      <button className="menu-toggle" onClick={() => setMenu(!menu)} aria-expanded={menu}>{menu ? <X /> : <Menu />}</button>
-      {menu && <div className="mobile-nav glass">
-        <button className="theme-toggle mobile" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} aria-pressed={theme === 'light'}>{theme === 'dark' ? <Sun /> : <Moon />} {theme === 'dark' ? 'Light mode' : 'Dark mode'}</button>
-        {nav.map((item) => <a key={item} href={`#${item}`} onClick={() => setMenu(false)}>{item}</a>)}
-      </div>}
-    </header>
+    <Header items={navItems} theme={theme} toggleTheme={toggleTheme} />
 
     <main id="main">
       <section id="home" className="hero section-grid" ref={heroRef} onMouseMove={handleHeroMove} onMouseLeave={resetHeroMove}>
@@ -397,39 +318,11 @@ export default function Home() {
 
       <section id="learning" className="content-section">
         <SectionTitle number="06" label="Learning">Expanding the <span>operating surface</span></SectionTitle>
-        <div className="learning-grid">{learning.map(({ title, status, icon: Icon, items }, i) => <article className="learning-card glass reveal-on-scroll" data-reveal="tilt-left" style={{ '--delay': `${i * 80}ms` } as React.CSSProperties} key={title}><div><span className="icon-box"><Icon /></span><b>{status}</b></div><h3>{title}</h3><ul>{items.map((item) => <li key={item}><i />{item}</li>)}</ul></article>)}</div>
-
-        <div className="this-week glass reveal-on-scroll" data-reveal="rise">
-          <div className="eyebrow"><i /> This week</div>
-          <div className="this-week-grid">
-            <div className="this-week-item"><span className="icon-box"><Sparkles /></span><div><b>Focus</b><span>{thisWeek.focus}</span></div></div>
-            <div className="this-week-item"><span className="icon-box violet"><BookOpen /></span><div><b>Reading</b>{thisWeek.book ? <a href={thisWeek.book.link} target="_blank">{thisWeek.book.title} — {thisWeek.book.author}</a> : <span className="soon">Updating soon</span>}</div></div>
-            <div className="this-week-item"><span className="icon-box"><FileText /></span><div><b>Paper · last 15 days</b>{thisWeek.paper ? <a href={thisWeek.paper.link} target="_blank">{thisWeek.paper.title}</a> : <span className="soon">Updating soon</span>}</div></div>
-          </div>
-          <a className="sync-link" href="https://learning.overflowbyte.cloud" target="_blank"><ExternalLink /> Full log synced at learning.overflowbyte.cloud</a>
+        <div className="learning-grid">{learningRoadmap.map(({ title, status, icon: Icon, items }, i) => <article className="learning-card glass reveal-on-scroll" data-reveal="tilt-left" style={{ '--delay': `${i * 80}ms` } as React.CSSProperties} key={title}><div><span className="icon-box"><Icon /></span><b>{status}</b></div><h3>{title}</h3><ul>{items.map((item) => <li key={item}><i />{item}</li>)}</ul></article>)}</div>
+        <div className="learning-cta reveal-on-scroll" data-reveal="rise">
+          <p>This week&apos;s focus, my Bookshelf, Papershelf, and recommended videos now live in their own space.</p>
+          <Link className="button primary large" href="/learning">Visit the Learning Hub <ArrowRight /></Link>
         </div>
-
-        <div className="sub-head reveal-on-scroll" data-reveal="rise"><h3>Bookshelf</h3><p>Books shaping how I think about systems and engineering.</p></div>
-        {bookshelf.length > 0 ? (
-          <div className="bookshelf-grid">{bookshelf.map((b, i) => <a key={b.title} className="book-card glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties} href={b.link} target="_blank"><BookOpen /><div><b>{b.title}</b><span>{b.author}</span></div></a>)}</div>
-        ) : (
-          <div className="empty-panel glass reveal-on-scroll" data-reveal="rise"><BookOpen /><p>Building this list — the full shelf will live at <a href="https://learning.overflowbyte.cloud" target="_blank">learning.overflowbyte.cloud</a>.</p></div>
-        )}
-
-        <div className="sub-head reveal-on-scroll" data-reveal="rise"><h3>Papershelf</h3><p>Research papers I&apos;ve read and found worth keeping.</p></div>
-        {papershelf.length > 0 ? (
-          <div className="bookshelf-grid">{papershelf.map((p, i) => <a key={p.title} className="book-card glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties} href={p.link} target="_blank"><FileText /><div><b>{p.title}</b><span>{p.authors}</span></div></a>)}</div>
-        ) : (
-          <div className="empty-panel glass reveal-on-scroll" data-reveal="rise"><FileText /><p>Building this list — the full papershelf will live at <a href="https://learning.overflowbyte.cloud" target="_blank">learning.overflowbyte.cloud</a>.</p></div>
-        )}
-
-        <div className="sub-head reveal-on-scroll" data-reveal="rise"><h3>Recommended learning</h3><p>Courses and videos I&apos;d point a teammate to.</p></div>
-        <div className="resource-grid">{recommendedLearning.map((r, i) => {
-          const body = <><span className="resource-kind"><ResourceIcon kind={r.kind} /> {resourceLabel[r.kind]}</span><b>{r.title}</b><span>{r.creator}</span></>;
-          return r.link
-            ? <a key={r.title} className="resource-card glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties} href={r.link} target="_blank">{body}<ExternalLink className="resource-go" /></a>
-            : <div key={r.title} className="resource-card resource-card-soon glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties}>{body}<span className="soon">Coming soon</span></div>;
-        })}</div>
       </section>
 
       <section id="certifications" className="content-section">
