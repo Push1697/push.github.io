@@ -8,11 +8,12 @@ import type { LucideIcon } from 'lucide-react';
 import MiniArchitecture, { type ArchKind } from '@/components/MiniArchitecture';
 import { SplitLetters } from '@/lib/splitText';
 import { useCanUse3D } from '@/lib/useCanUse3D';
+import { useTheme, type Theme } from '@/lib/useTheme';
 import {
   Activity, ArrowRight, Award, BookOpen, BriefcaseBusiness, Check, ChevronDown,
   Cloud, Code2, Copy, Database, Download, ExternalLink, FileText, Github, GraduationCap,
-  Headphones, Linkedin, ListVideo, Mail, MapPin, Menu, Monitor, Network, Package, Server,
-  Shield, Sparkles, Terminal, Users, Wifi, X, Zap,
+  Headphones, Linkedin, ListVideo, Mail, MapPin, Menu, Monitor, Moon, Network, Package, Server,
+  Shield, Sparkles, Sun, Terminal, Users, Wifi, X, Zap,
 } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import { FaAws, FaDatabase, FaDocker, FaLinux, FaShieldAlt, FaWindows, FaYoutube } from 'react-icons/fa';
@@ -80,10 +81,14 @@ const learning = [
 const thisWeek = {
   focus: 'Talos Linux cluster networking and GitOps workflows for the AWS Solutions Architect track',
   book: null as { title: string; author: string; link: string } | null,
-  paper: null as { title: string; link: string } | null,
+  paper: { title: 'The Story of AWS Glue', link: 'https://drive.google.com/file/d/1aBOYX0yWdl_nkmguj0MW_nxqtqjY1i6H/view?usp=sharing' } as { title: string; link: string } | null,
 };
 
 const bookshelf: { title: string; author: string; link: string }[] = [];
+
+const papershelf: { title: string; authors: string; link: string }[] = [
+  { title: 'The Story of AWS Glue', authors: 'Mohit Saxena et al., AWS', link: 'https://drive.google.com/file/d/1aBOYX0yWdl_nkmguj0MW_nxqtqjY1i6H/view?usp=sharing' },
+];
 
 const recommendedLearning: { kind: 'udemy' | 'youtube' | 'playlist'; title: string; creator: string; link?: string }[] = [
   { kind: 'udemy', title: 'AWS Certified Solutions Architect — Associate', creator: 'Stephane Maarek', link: 'https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/' },
@@ -196,13 +201,13 @@ function CapabilityCard({ group, index }: { group: typeof capabilities[number]; 
   );
 }
 
-function Topology() {
+function Topology({ theme }: { theme: Theme }) {
   const nodes = [
     ['FortiGate', 82, 27, Shield], ['AWS', 91, 58, Cloud], ['Linux', 15, 76, Server],
     ['Kubernetes', 22, 20, Network], ['Docker', 8, 44, Package], ['Zabbix', 75, 83, Activity],
     ['Windows Server', 50, 91, Monitor], ['Networking', 50, 8, Wifi],
   ] as const;
-  const canUse3D = useCanUse3D();
+  const canUse3D = useCanUse3D() && theme === 'dark';
 
   return <div className={`topology reveal-on-scroll ${canUse3D ? 'topology-3d' : ''}`} data-reveal="scale">
     <div className="topology-glow" />
@@ -228,6 +233,7 @@ export default function Home() {
   const heroRef = useRef<HTMLElement | null>(null);
   const shellRef = useRef<HTMLDivElement | null>(null);
   const canUse3D = useCanUse3D();
+  const { theme, toggleTheme } = useTheme();
   const [menu, setMenu] = useState(false);
   const [active, setActive] = useState('home');
   const navListRef = useRef<HTMLElement | null>(null);
@@ -318,7 +324,7 @@ export default function Home() {
   const copyEmail = async () => { await navigator.clipboard.writeText('push1697@gmail.com'); setCopied(true); setTimeout(() => setCopied(false), 1800); };
 
   return <div className="portfolio-shell" ref={shellRef}>
-    {canUse3D && <div className="global-wave-bg" aria-hidden="true"><GlobalWaveBackground /></div>}
+    {canUse3D && theme === 'dark' && <div className="global-wave-bg" aria-hidden="true"><GlobalWaveBackground /></div>}
     <div className="cursor-glow" aria-hidden="true" style={{ opacity: Math.min(.6, .28 + scrollProgress / 260) } as React.CSSProperties} />
     <a href="#main" className="skip-link">Skip to content</a>
     <header className={`site-header glass ${scrolled ? 'is-scrolled' : ''}`}>
@@ -328,9 +334,16 @@ export default function Home() {
         <span className="nav-indicator" style={{ transform: `translateX(${navIndicator.left}px)`, width: navIndicator.width, opacity: navIndicator.ready ? 1 : 0 } as React.CSSProperties} aria-hidden="true" />
         {nav.map((item) => <a key={item} ref={(el) => { navLinkRefs.current[item] = el; }} className={active === item ? 'active' : ''} href={`#${item}`}>{item}</a>)}
       </nav>
-      <div className="header-actions"><a className="button ghost" href="/pushpendra-resume.pdf" download><Download /> Resume</a><a className="button primary" href="https://www.linkedin.com/in/pushpendra16/" target="_blank"><Linkedin /> LinkedIn</a></div>
+      <div className="header-actions">
+        <button className="theme-toggle" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} aria-pressed={theme === 'light'}>{theme === 'dark' ? <Sun /> : <Moon />}</button>
+        <a className="button ghost" href="/pushpendra-resume.pdf" download><Download /> Resume</a>
+        <a className="button primary" href="https://www.linkedin.com/in/pushpendra16/" target="_blank"><Linkedin /> LinkedIn</a>
+      </div>
       <button className="menu-toggle" onClick={() => setMenu(!menu)} aria-expanded={menu}>{menu ? <X /> : <Menu />}</button>
-      {menu && <div className="mobile-nav glass">{nav.map((item) => <a key={item} href={`#${item}`} onClick={() => setMenu(false)}>{item}</a>)}</div>}
+      {menu && <div className="mobile-nav glass">
+        <button className="theme-toggle mobile" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} aria-pressed={theme === 'light'}>{theme === 'dark' ? <Sun /> : <Moon />} {theme === 'dark' ? 'Light mode' : 'Dark mode'}</button>
+        {nav.map((item) => <a key={item} href={`#${item}`} onClick={() => setMenu(false)}>{item}</a>)}
+      </div>}
     </header>
 
     <main id="main">
@@ -350,7 +363,7 @@ export default function Home() {
             <span>incident response: ready</span>
           </div>
         </div>
-        <Topology />
+        <Topology theme={theme} />
       </section>
 
       <section className="metrics">
@@ -401,6 +414,13 @@ export default function Home() {
           <div className="bookshelf-grid">{bookshelf.map((b, i) => <a key={b.title} className="book-card glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties} href={b.link} target="_blank"><BookOpen /><div><b>{b.title}</b><span>{b.author}</span></div></a>)}</div>
         ) : (
           <div className="empty-panel glass reveal-on-scroll" data-reveal="rise"><BookOpen /><p>Building this list — the full shelf will live at <a href="https://learning.overflowbyte.cloud" target="_blank">learning.overflowbyte.cloud</a>.</p></div>
+        )}
+
+        <div className="sub-head reveal-on-scroll" data-reveal="rise"><h3>Papershelf</h3><p>Research papers I&apos;ve read and found worth keeping.</p></div>
+        {papershelf.length > 0 ? (
+          <div className="bookshelf-grid">{papershelf.map((p, i) => <a key={p.title} className="book-card glass reveal-on-scroll" data-reveal="rise" style={{ '--delay': `${i * 60}ms` } as React.CSSProperties} href={p.link} target="_blank"><FileText /><div><b>{p.title}</b><span>{p.authors}</span></div></a>)}</div>
+        ) : (
+          <div className="empty-panel glass reveal-on-scroll" data-reveal="rise"><FileText /><p>Building this list — the full papershelf will live at <a href="https://learning.overflowbyte.cloud" target="_blank">learning.overflowbyte.cloud</a>.</p></div>
         )}
 
         <div className="sub-head reveal-on-scroll" data-reveal="rise"><h3>Recommended learning</h3><p>Courses and videos I&apos;d point a teammate to.</p></div>
